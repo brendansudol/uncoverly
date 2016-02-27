@@ -8,8 +8,8 @@ if USE_LOCAL_DATABASE:
     DATABASES['default'] = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'uncoverly',
-        'USER': 'uncoverlyuser',
-        'PASSWORD': 'uncoverlypw',
+        'USER': 'uncoverly',
+        'PASSWORD': 'password',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }

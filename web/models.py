@@ -9,7 +9,34 @@ class ModelBase(models.Model):
         abstract = True
 
 
-# class Foo(ModelBase):
-#     foo = models.DateField(db_index=True)
-#     bar = models.CharField(max_length=256)
-#     baz = models.PositiveIntegerField(blank=True, null=True)
+class Seller(ModelBase):
+    id = models.CharField(max_length=64, primary_key=True)
+    name = models.CharField(max_length=256)
+    title = models.CharField(max_length=1024, null=True, blank=True)
+    icon_url = models.URLField(null=True, blank=True)
+
+    def __str__(self):
+        return self.id
+
+
+class Product(ModelBase):
+    id = models.CharField(max_length=64, primary_key=True)
+    seller = models.ForeignKey(Seller, related_name='products')
+
+    title = models.CharField(max_length=1024)
+    state = models.CharField(max_length=64)
+
+    price = models.CharField(max_length=32)
+    currency = models.CharField(max_length=32)
+
+    category = models.CharField(max_length=512, null=True, blank=True)
+    tags = models.CharField(max_length=512, null=True, blank=True)
+    materials = models.CharField(max_length=512, null=True, blank=True)
+
+    views = models.PositiveIntegerField(null=True, blank=True)
+    favorers = models.PositiveIntegerField(null=True, blank=True)
+
+    image_main = models.URLField()
+
+    def __str__(self):
+        return self.id
