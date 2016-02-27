@@ -1,0 +1,1 @@
+web: gunicorn uncoverly.wsgi --log-file -

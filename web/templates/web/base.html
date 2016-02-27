@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" data-csrf="{{ csrf_token }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/static/img/favicon.ico">
+
+    <title>{% block title %}Uncoverly{% endblock %}</title>
+    <meta name="description" content="TODO">
+
+    <link href="//fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+    <link href="/static/build/app.css" rel="stylesheet">
+    {% block css %}{% endblock %}
+
+    <script>window.Uncoverly=window.Uncoverly||{};</script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="clearfix mb2 bg-darken-2">
+      <div class="container px2 py1 center">
+        <a href="/" class="bold black caps h4">Uncoverly v2</a>
+      </div>
+    </nav>
+    <div class="container px2 py3">
+      {% block content %}{% endblock %}
+      {% block jsconfig %}{% endblock %}
+      {% block footerjs %}{% endblock %}
+    </div>
+  </body>
+</html>
