@@ -3,4 +3,14 @@
 
 {% block content %}
 <h2>Home</h2>
+
+{% if request.user.is_authenticated %}
+<div>{{ request.user }} <a href="{% url 'web:logout' %}">Logout</a></div>
+{% else %}
+<div>
+    <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Login with Facebook</a><br>
+    <a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}">Login with Twitter</a>
+</div>
+{% endif %}
+
 {% endblock %}
