@@ -22,22 +22,19 @@ class Seller(ModelBase):
 
 class Product(ModelBase):
     id = models.CharField(max_length=64, primary_key=True)
-    seller = models.ForeignKey(Seller, related_name='products')
-
-    title = models.CharField(max_length=1024)
-    state = models.CharField(max_length=64)
-
-    price = models.CharField(max_length=32)
-    currency = models.CharField(max_length=32)
-
+    seller = models.ForeignKey(
+        Seller, related_name='products', null=True, blank=True
+    )
+    title = models.CharField(max_length=1024, null=True, blank=True)
+    state = models.CharField(max_length=64, null=True, blank=True)
+    price = models.CharField(max_length=32, null=True, blank=True)
+    currency = models.CharField(max_length=32, null=True, blank=True)
     category = models.CharField(max_length=512, null=True, blank=True)
     tags = models.CharField(max_length=512, null=True, blank=True)
     materials = models.CharField(max_length=512, null=True, blank=True)
-
     views = models.PositiveIntegerField(null=True, blank=True)
     favorers = models.PositiveIntegerField(null=True, blank=True)
-
-    image_main = models.URLField()
+    image_main = models.URLField(null=True, blank=True)
 
     def __str__(self):
         return self.id
