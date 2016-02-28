@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" data-csrf="{{ csrf_token }}">
+<html lang="en" 
+      data-csrf="{{ csrf_token }}" 
+      data-user="{% firstof request.user.pk '' %}">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,6 +12,7 @@
     <meta name="description" content="TODO">
 
     <link href="//fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+    <link href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
     <link href="/static/build/app.css" rel="stylesheet">
     {% block css %}{% endblock %}
 
@@ -24,7 +27,9 @@
   <body>
     <nav class="clearfix mb2 bg-darken-2">
       <div class="container px2 py1 center">
-        <a href="/" class="bold black caps h4">Uncoverly v2</a>
+        <a href="/" class="bold black caps h4">
+          Uncoverly v2 <i class="icon ion-happy-outline"></i>
+        </a>
       </div>
     </nav>
     <div class="container px2 py3">

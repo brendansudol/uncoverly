@@ -1,0 +1,12 @@
+{% extends 'web/base.html' %}
+
+
+{% block content %}
+{% if faves|length %}
+  <div class="border rounded">
+  {% for fave in faves %}
+    <p>{{ fave.product.pk }}</p>
+  {% endfor %}
+  </div>
+{% endif %}
+{% endblock %}
