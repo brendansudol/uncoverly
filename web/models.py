@@ -46,3 +46,11 @@ class Favorite(ModelBase):
 
     class Meta:
         unique_together = ('product', 'user')
+
+
+class Find(ModelBase):
+    product = models.ForeignKey(Product, related_name='finds')
+    user = models.ForeignKey(User, related_name='finds')
+
+    class Meta:
+        unique_together = ('product', 'user')
