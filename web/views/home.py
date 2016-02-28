@@ -1,9 +1,11 @@
-from django.views.generic import TemplateView
+from django.views.generic import ListView
+
+from web.models import Product
 
 
-class HomeView(TemplateView):
+class HomeView(ListView):
+    context_object_name = 'products'
+    model = Product
+    ordering = '-created'
+    paginate_by = 12
     template_name = 'web/home.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(HomeView, self).get_context_data(**kwargs)
-        return context
