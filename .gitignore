@@ -10,5 +10,6 @@ __pycache__/
 
 node_modules
 secrets
+TODO
 venv
 web/static/build
