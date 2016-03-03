@@ -9,4 +9,5 @@ require('../sass/app.scss');
  * js
  */
 
-console.log('boom');
+require('./vendor/modal');
+require('./modules/favorite');

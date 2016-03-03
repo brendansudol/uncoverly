@@ -17,10 +17,23 @@
       <div class="p2 border">
         {% if p.image_main %}<img src="{{ p.image_main }}">{% endif %}
         <div class="mt2 one-line">{{ p.title }}</div>
+        <a class="favorite black" href="#" data-id='{{ p.pk }}'>
+        {% if p.pk in favorites %}
+          <i class="icon ion-ios-heart"></i>
+        {% else %}
+          <i class="icon ion-ios-heart-outline"></i>
+        {% endif %}
+        </a>
       </div>
     </div>
     {% endfor %}
 </div>
 
 {% include 'web/_includes/pagination.html' %}
+{% include 'web/_includes/modal.html' %}
+{% endblock %}
+
+
+{% block footerjs %}
+<script src="/static/build/app.js"></script>
 {% endblock %}

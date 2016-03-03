@@ -1,0 +1,11 @@
+<div class="modal" id="myModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h3 class="m0 mb1">Save your favorites</h3>
+        <p>Sign in to.......</p>
+        <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" class="btn btn-primary">Login with Facebook</a>
+      </div>
+    </div>
+  </div>
+</div>
