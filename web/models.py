@@ -1,5 +1,9 @@
+from functools import reduce
+from operator import or_
+
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import Q
 
 
 class ModelBase(models.Model):
@@ -20,6 +24,19 @@ class Seller(ModelBase):
         return self.id
 
 
+class ProductManager(models.Manager):
+    def search(self, terms):
+        terms = [term.strip() for term in terms.split()]
+
+        q_objs = []
+        for term in terms:
+            q_objs.append(Q(title__icontains=term))
+            q_objs.append(Q(tags__icontains=term))
+
+        qs = self.get_queryset()
+        return qs.filter(reduce(or_, q_objs))
+
+
 class Product(ModelBase):
     id = models.CharField(max_length=64, primary_key=True)
     seller = models.ForeignKey(
@@ -35,6 +52,8 @@ class Product(ModelBase):
     views = models.PositiveIntegerField(null=True, blank=True)
     favorers = models.PositiveIntegerField(null=True, blank=True)
     image_main = models.URLField(null=True, blank=True)
+
+    objects = ProductManager()
 
     def __str__(self):
         return self.id
