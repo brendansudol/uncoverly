@@ -1,0 +1,14 @@
+{% extends 'web/base.html' %}
+
+
+{% block content %}
+<div>{{ seller.name }}</div>
+<div>{{ seller.title }}</div>
+{% if products|length %}
+  <div class="border rounded">
+  {% for p in products %}
+    <p>{{ p.pk }}</p>
+  {% endfor %}
+  </div>
+{% endif %}
+{% endblock %}

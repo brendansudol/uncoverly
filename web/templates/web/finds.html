@@ -1,0 +1,12 @@
+{% extends 'web/base.html' %}
+
+
+{% block content %}
+{% if finds|length %}
+  <div class="border rounded">
+  {% for find in finds %}
+    <p>{{ find.product.pk }}</p>
+  {% endfor %}
+  </div>
+{% endif %}
+{% endblock %}
