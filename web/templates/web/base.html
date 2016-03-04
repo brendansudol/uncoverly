@@ -24,18 +24,23 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
-    <nav class="clearfix mb2 bg-darken-2">
-      <div class="container px2 py1 center">
-        <a href="/" class="bold black caps h4">
-          Uncoverly v2 <i class="icon ion-happy-outline"></i>
-        </a>
+  <body class="site">
+    <div class="site-wrap">
+      <nav class="clearfix mb2 bg-darken-2">
+        <div class="container px2 py1 center">
+          <a href="/" class="bold black caps h4">
+            Uncoverly v2 <i class="icon ion-happy-outline"></i>
+          </a>
+        </div>
+      </nav>
+      <div class="container px2 py3">
+        {% block content %}{% endblock %}
       </div>
-    </nav>
-    <div class="container px2 py3">
-      {% block content %}{% endblock %}
-      {% block jsconfig %}{% endblock %}
-      {% block footerjs %}{% endblock %}
     </div>
+    <footer class="center">
+      <div class="p2 h6">footer stuff...</div>
+    </footer>
+    {% block jsconfig %}{% endblock %}
+    {% block footerjs %}{% endblock %}
   </body>
 </html>
