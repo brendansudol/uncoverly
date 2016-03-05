@@ -8,6 +8,7 @@ from web.views.logout import LogoutView
 from web.views.misc import (
     AboutView, ContactView, PrivacyView, TermsView
 )
+from web.views.newsletter import NewsletterView
 from web.views.product import ProductView
 from web.views.seller import SellerView
 
@@ -19,6 +20,7 @@ urlpatterns = patterns(
     url(r'^contact$', ContactView.as_view(), name='contact'),
     url(r'^privacy$', PrivacyView.as_view(), name='privacy'),
     url(r'^terms$', TermsView.as_view(), name='terms'),
+    url(r'^newsletter$', NewsletterView.as_view(), name='newsletter'),
     url(r'^c/(?P<cat>[\w/\-]+)?$', CategoryView.as_view(), name='category'),
     url(r'^s/(?P<pk>[\w/\-]+)?$', SellerView.as_view(), name='seller'),
     url(r'^p/(?P<pk>[\w/\-]+)?$', ProductView.as_view(), name='product'),

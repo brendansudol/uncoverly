@@ -5,12 +5,14 @@ defusedxml==0.4.1
 dj-database-url==0.4.0
 Django==1.8.6
 django-postgrespool==0.3.0
+docopt==0.4.0
 flake8==2.5.0
 gnureadline==6.3.3
 gunicorn==19.3.0
 ipython==4.0.0
 ipython-genutils==0.1.0
 jsonfield==1.0.3
+mailchimp==2.0.9
 mccabe==0.3.1
 oauthlib==1.0.3
 path.py==8.1.2
