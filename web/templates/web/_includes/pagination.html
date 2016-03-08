@@ -1,15 +1,22 @@
+{% load extras %}
+
+
 {% if is_paginated %}
-<div class="pagination">
-    <span class="page-links">
-        {% if page_obj.has_previous %}
-        <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
-        {% endif %}
-        <span class="page-current">
-        {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
-        </span>
-        {% if page_obj.has_next %}
-        <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
-        {% endif %}
-    </span>
+<div class="pagination py2">
+  <div class="inline-block overflow-hidden border rounded">
+    {% if page_obj.has_previous %}
+    <a href="{% make_url request.path page_obj.previous_page_number query %}" class="left btn border-right">
+      &larr; Previous
+    </a>
+    {% endif %}
+    {% if page_obj.has_next %}
+    <a href="{% make_url request.path page_obj.next_page_number query %}" class="right btn">
+      Next &rarr;
+    </a>
+    {% endif %}
+    <div class="left btn muted border-right">
+      {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+    </div>
+  </div>
 </div>
 {% endif %}
