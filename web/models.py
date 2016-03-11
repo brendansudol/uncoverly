@@ -1,5 +1,6 @@
 from functools import reduce
 from operator import or_
+from random import randrange
 
 from django.contrib.auth.models import User
 from django.db import models
@@ -52,6 +53,9 @@ class Product(ModelBase):
     views = models.PositiveIntegerField(null=True, blank=True)
     favorers = models.PositiveIntegerField(null=True, blank=True)
     image_main = models.URLField(null=True, blank=True)
+    is_awesome = models.NullBooleanField()
+    is_visible = models.BooleanField(default=False)
+    rand1 = models.PositiveIntegerField(default=randrange(1e4))
 
     objects = ProductManager()
 
