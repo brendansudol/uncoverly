@@ -29,4 +29,4 @@ class CategoryView(ListView):
 
     def get_queryset(self):
         qs = super(CategoryView, self).get_queryset()
-        return qs.filter(category=self.category)
+        return qs.filter(category=CATEGORIES[self.category])

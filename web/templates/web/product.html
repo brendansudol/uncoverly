@@ -4,10 +4,24 @@
 {% block content %}
 <div>{{ product.title }}</div>
 <img src="{{ product.image_main }}">
-<div>
-    <a target="_blank" href="https://twitter.com/intent/tweet?text=foo&amp;hashtags=uncoverly" class="btn btn-outline">Twitter</a>
-    <a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u=http://www.uncoverly.com/p/186372207" class="btn btn-outline">Facebook</a>
+<div class="mb2">
+  <a target="_blank" href="https://twitter.com/intent/tweet?text=foo&amp;hashtags=uncoverly" class="btn btn-outline">Twitter</a>
+  <a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u=http://www.uncoverly.com/p/186372207" class="btn btn-outline">Facebook</a>
 </div>
+
+{% if more_category|length %}
+<h2>More from {{ product.category }}</h2>
+{% for p in more_category %}
+  <p>{{ p.pk }}</p>
+{% endfor %}
+{% endif %}
+
+{% if more_seller|length %}
+<h2>More from {{ product.seller.name }}</h2>
+{% for p in more_seller %}
+  <p>{{ p.pk }}</p>
+{% endfor %}
+{% endif %}
 {% endblock %}
 
 
