@@ -8,6 +8,7 @@ __pycache__/
 *.swp
 *.log
 
+local
 node_modules
 secrets
 TODO

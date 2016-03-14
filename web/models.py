@@ -39,6 +39,9 @@ class ProductManager(models.Manager):
 
 
 class Product(ModelBase):
+    def rand_default():
+        return randrange(1e4)
+
     id = models.CharField(max_length=64, primary_key=True)
     seller = models.ForeignKey(
         Seller, related_name='products', null=True, blank=True
@@ -47,6 +50,7 @@ class Product(ModelBase):
     state = models.CharField(max_length=64, null=True, blank=True)
     price = models.CharField(max_length=32, null=True, blank=True)
     currency = models.CharField(max_length=32, null=True, blank=True)
+    price_usd = models.PositiveIntegerField(null=True, blank=True)
     category = models.CharField(max_length=512, null=True, blank=True)
     tags = models.CharField(max_length=512, null=True, blank=True)
     materials = models.CharField(max_length=512, null=True, blank=True)
@@ -55,7 +59,7 @@ class Product(ModelBase):
     image_main = models.URLField(null=True, blank=True)
     is_awesome = models.NullBooleanField()
     is_visible = models.BooleanField(default=False)
-    rand1 = models.PositiveIntegerField(default=randrange(1e4))
+    rand1 = models.PositiveIntegerField(default=rand_default)
 
     objects = ProductManager()
 

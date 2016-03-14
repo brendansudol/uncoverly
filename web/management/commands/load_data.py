@@ -3,7 +3,7 @@ import logging
 
 from django.core.management import BaseCommand
 
-from web.models import Product
+from web.models import Product, Seller
 
 
 logger = logging.getLogger(__name__)
@@ -29,8 +29,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         if options['replace']:
-            logger.info('erasing existing products')
+            logger.info('erasing existing products & sellers')
             Product.objects.all().delete()
+            Seller.objects.all().delete()
 
         with open(options['filename']) as f:
             data = json.load(f)
@@ -39,16 +40,26 @@ class Command(BaseCommand):
             if d['state'] != 'active':
                 continue
 
+            seller = None
+            if d['seller']:
+                s = d['seller']
+                seller, _ = Seller.objects.get_or_create(
+                    id=s['id'],
+                    defaults={'name': s['name']}
+                )
+
             Product.objects.create(
-                id=d['listing_id'],
+                id=d['product_id'],
                 title=d['title'],
                 state=d['state'],
-                price=d['price'],
-                currency=d['currency_code'],
-                category=d['taxonomy_path'],
+                price_usd=d['price_usd'],
+                category=d['category'],
                 tags=d['tags'],
-                materials=d['materials'],
-                views=d['views'],
-                favorers=d['num_favorers'],
-                image_main=d['image']
+                image_main=d['img'],
+                seller=seller,
             )
+
+        print('totals: {} products, {} sellers'.format(
+            Product.objects.count(),
+            Seller.objects.count(),
+        ))
