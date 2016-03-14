@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, url
+from django.views.decorators.cache import cache_page
 
 from web.views.category import CategoriesView, CategoryView
 from web.views.favorite import FavoriteView, FavoritesView
@@ -21,7 +22,11 @@ urlpatterns = patterns(
     url(r'^privacy$', PrivacyView.as_view(), name='privacy'),
     url(r'^terms$', TermsView.as_view(), name='terms'),
     url(r'^newsletter$', NewsletterView.as_view(), name='newsletter'),
-    url(r'^categories$', CategoriesView.as_view(), name='categories'),
+    url(
+        r'^categories$',
+        cache_page(60 * 5)(CategoriesView.as_view()),
+        name='categories'
+    ),
     url(r'^c/(?P<cat>[\w/\-]+)?$', CategoryView.as_view(), name='category'),
     url(r'^s/(?P<pk>[\w/\-]+)?$', SellerView.as_view(), name='seller'),
     url(r'^p/(?P<pk>[\w/\-]+)?$', ProductView.as_view(), name='product'),

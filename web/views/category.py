@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.shortcuts import redirect
 from django.views.generic import ListView, TemplateView
 
@@ -10,8 +12,24 @@ class CategoriesView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(CategoriesView, self).get_context_data(**kwargs)
-        context['categories'] = CATEGORIES
+
+        context.update({
+            'now': datetime.now(),
+            'categories': CATEGORIES,
+            'cat_projects': self.products_by_category(),
+        })
+
         return context
+
+    def products_by_category(self):
+        data = {}
+
+        for key, category in CATEGORIES.items():
+            data[category] = Product.objects \
+                .filter(category=category) \
+                .all()[:4]
+
+        return data
 
 
 class CategoryView(ListView):

@@ -2,7 +2,12 @@
 
 
 {% block content %}
-{% for c in categories %}
-  <p>{{ c }}</p>
+<h2>{{ now|date:"d M Y, H:i:s" }}</h2>
+<br><br>
+{% for category, products in cat_projects.items %}
+  <h2>{{ category }}</h2>
+  {% for p in products %}
+    <p>{{ p }}</p>
+  {% endfor %}
 {% endfor %}
 {% endblock %}

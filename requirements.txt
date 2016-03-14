@@ -23,6 +23,7 @@ psycopg2==2.6
 ptyprocess==0.5.1
 pyflakes==1.0.0
 PyJWT==1.4.0
+pylibmc==1.5.0
 python-social-auth==0.2.14
 python3-openid==3.0.9
 requests==2.9.1
