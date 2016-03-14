@@ -11,3 +11,4 @@ require('../sass/app.scss');
 
 require('./vendor/modal');
 require('./modules/favorite');
+require('./modules/newsletter');

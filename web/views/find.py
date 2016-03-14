@@ -1,4 +1,6 @@
-from django.views.generic import ListView
+from django.http import JsonResponse
+from django.shortcuts import render
+from django.views.generic import ListView, View
 
 from web.models import Find
 
@@ -13,3 +15,22 @@ class FindsView(ListView):
     def get_queryset(self):
         qs = super(FindsView, self).get_queryset()
         return qs.filter(user_id=self.request.user.pk)
+
+
+class FindView(View):
+    template_name = 'web/find.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+    def post(self, request):
+        if not request.user.is_authenticated():
+            return self.outcome(status='fail', reason='no_auth')
+
+        post = request.POST
+        print(post)
+
+        return self.outcome(status='incomplete')
+
+    def outcome(self, **kwargs):
+        return JsonResponse(dict(**kwargs))

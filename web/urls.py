@@ -3,7 +3,7 @@ from django.views.decorators.cache import cache_page
 
 from web.views.category import CategoriesView, CategoryView
 from web.views.favorite import FavoriteView, FavoritesView
-from web.views.find import FindsView
+from web.views.find import FindView, FindsView
 from web.views.home import HomeView
 from web.views.logout import LogoutView
 from web.views.misc import (
@@ -32,6 +32,7 @@ urlpatterns = patterns(
     url(r'^p/(?P<pk>[\w/\-]+)?$', ProductView.as_view(), name='product'),
     url(r'^favorite/(?P<pid>[\w/\-]+)?$', FavoriteView.as_view(), name='fave'),
     url(r'^favorites$', FavoritesView.as_view(), name='faves'),
+    url(r'^find$', FindView.as_view(), name='find'),
     url(r'^finds$', FindsView.as_view(), name='finds'),
     url(r'^logout$', LogoutView.as_view(), name='logout'),
 )

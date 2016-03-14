@@ -2,7 +2,7 @@ var $ = require('jquery');
 
 
 var Favorite = {
-    fave_endpoint: '/favorite/',
+    endpoint_base: '/favorite/',
     csrf: $('html').data('csrf'),
     signed_out: !$('html').data('user'),
     ico: 'ion-ios-heart',
@@ -33,7 +33,7 @@ var Favorite = {
     updateAttempt: function() {
         var self = this;
 
-        var url = this.fave_endpoint + this.issue_id,
+        var url = this.endpoint_base + this.issue_id,
             data = {'csrfmiddlewaretoken': this.csrf};
 
         var posting = $.post(url, data);
