@@ -2,25 +2,57 @@
 
 
 {% block content %}
-<div>{{ product.title }}</div>
-<img src="{{ product.image_main }}">
-<div class="mb2">
-  <a target="_blank" href="https://twitter.com/intent/tweet?text=foo&amp;hashtags=uncoverly" class="btn btn-outline">Twitter</a>
-  <a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u=http://www.uncoverly.com/p/186372207" class="btn btn-outline">Facebook</a>
+<div class="clearfix bg-white border">
+  <div class="col sm-col-7 p2">
+    <img src="{{ product.image_main }}">
+  </div>
+  <div class="col sm-col-5 p2">
+    <div class="h3 mb2">
+      {{ product.title }}
+    </div>
+    <div class="mb2">
+      <a class="btn btn-primary" href="#!">$-- on Etsy</a>
+    </div>
+    <div class="mb2">
+      <a target="_blank" href="https://twitter.com/intent/tweet?text=foo&amp;hashtags=uncoverly" class="btn btn-outline">Twitter</a>
+      <a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u=http://www.uncoverly.com/p/186372207" class="btn btn-outline">Facebook</a>
+    </div>
+  </div>
 </div>
+
 
 {% if more_category|length %}
 <h2>More from {{ product.category }}</h2>
+<div class="clearfix mxn1">
 {% for p in more_category %}
-  <p>{{ p.pk }}</p>
+  <div class="col col-6 sm-col-3 border-box p1">
+    <div class="bg-white border rounded">
+    {% if p.image_main %}
+      <a href="{% url 'web:product' p.pk %}">
+        <img class="block" src="{{ p.image_main }}">
+      </a>
+    {% endif %}
+    </div>
+  </div>
 {% endfor %}
+</div>
 {% endif %}
 
 {% if more_seller|length %}
 <h2>More from {{ product.seller.name }}</h2>
+<div class="clearfix mxn1">
 {% for p in more_seller %}
-  <p>{{ p.pk }}</p>
+  <div class="col col-6 sm-col-3 border-box p1">
+    <div class="bg-white border rounded">
+    {% if p.image_main %}
+      <a href="{% url 'web:product' p.pk %}">
+        <img class="block" src="{{ p.image_main }}">
+      </a>
+    {% endif %}
+    </div>
+  </div>
 {% endfor %}
+</div>
 {% endif %}
 {% endblock %}
 
