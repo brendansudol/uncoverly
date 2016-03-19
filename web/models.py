@@ -66,6 +66,11 @@ class Product(ModelBase):
     def __str__(self):
         return self.id
 
+    @property
+    def image_lg(self):
+        if self.image_main:
+            return self.image_main.replace("340x270", "570xN")
+
 
 class Favorite(ModelBase):
     product = models.ForeignKey(Product, related_name='favorites')

@@ -24,7 +24,8 @@ urlpatterns = patterns(
     url(r'^newsletter$', NewsletterView.as_view(), name='newsletter'),
     url(
         r'^categories$',
-        cache_page(60 * 5)(CategoriesView.as_view()),
+        # cache_page(60 * 5)(CategoriesView.as_view()),
+        CategoriesView.as_view(),
         name='categories'
     ),
     url(r'^c/(?P<cat>[\w/\-]+)?$', CategoryView.as_view(), name='category'),

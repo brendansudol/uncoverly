@@ -4,19 +4,21 @@
 {% block content %}
 <h2>{{ now|date:"d M Y, H:i:s" }}</h2>
 {% for category, products in cat_projects.items %}
-  <h3>{{ category }}</h3>
-  <div class="clearfix mxn1">
-  {% for p in products %}
-    <div class="col col-6 sm-col-3 border-box p1">
-      <div class="bg-white border rounded">
-      {% if p.image_main %}
-        <a href="{% url 'web:product' p.pk %}">
-          <img class="block" src="{{ p.image_main }}">
-        </a>
-      {% endif %}
+  <div class="mb3">
+    <h3>{{ category }}</h3>
+    <div class="clearfix">
+    {% for p in products %}
+      <div class="col col-4 sm-col-2">
+        <div class="bg-white">
+        {% if p.image_main %}
+          <a href="{% url 'web:product' p.pk %}">
+            <img class="block" src="{{ p.image_main }}">
+          </a>
+        {% endif %}
+        </div>
       </div>
+    {% endfor %}
     </div>
-  {% endfor %}
   </div>
 {% endfor %}
 {% endblock %}

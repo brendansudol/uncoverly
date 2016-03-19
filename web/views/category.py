@@ -9,6 +9,7 @@ from web.util.categories import CATEGORIES
 
 class CategoriesView(TemplateView):
     template_name = 'web/categories.html'
+    products_per_category = 6
 
     def get_context_data(self, **kwargs):
         context = super(CategoriesView, self).get_context_data(**kwargs)
@@ -27,7 +28,7 @@ class CategoriesView(TemplateView):
         for key, category in CATEGORIES.items():
             data[category] = Product.objects \
                 .filter(category=category) \
-                .all()[:4]
+                .all()[:self.products_per_category]
 
         return data
 
