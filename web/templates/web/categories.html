@@ -2,12 +2,16 @@
 
 
 {% block content %}
-<h2>{{ now|date:"d M Y, H:i:s" }}</h2>
-{% for category, products in cat_projects.items %}
-  <div class="mb3">
-    <h3>{{ category }}</h3>
+<!-- <h2>{{ now|date:"d M Y, H:i:s" }}</h2> -->
+{% for cat, data in products.items %}
+  {% if cat != 'misc' %}
+  <div class="mb4">
+    <a class="block bg-darken-1 black h4 bold py2 px3" href="{% url 'web:category' cat %}">
+      <i class="right icon ion-chevron-right"></i>
+      {{ data.display }}
+    </a>
     <div class="clearfix">
-    {% for p in products %}
+    {% for p in data.products %}
       <div class="col col-4 sm-col-2">
         <div class="bg-white">
         {% if p.image_main %}
@@ -20,5 +24,6 @@
     {% endfor %}
     </div>
   </div>
+  {% endif %}
 {% endfor %}
 {% endblock %}

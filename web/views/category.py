@@ -16,8 +16,7 @@ class CategoriesView(TemplateView):
 
         context.update({
             'now': datetime.now(),
-            'categories': CATEGORIES,
-            'cat_projects': self.products_by_category(),
+            'products': self.products_by_category(),
         })
 
         return context
@@ -26,11 +25,17 @@ class CategoriesView(TemplateView):
         data = {}
 
         for key, category in CATEGORIES.items():
-            data[category] = Product.objects \
-                .filter(category=category) \
-                .all()[:self.products_per_category]
+            data[key] = {
+                'display': category,
+                'products': self.product_sample(category),
+            }
 
         return data
+
+    def product_sample(self, category):
+        return Product.objects \
+            .filter(category=category) \
+            .all()[:self.products_per_category]
 
 
 class CategoryView(ListView):
