@@ -11,7 +11,7 @@
     <title>{% block title %}Uncoverly{% endblock %}</title>
     <meta name="description" content="TODO">
 
-    <link href="//fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Lato:300,400,900" rel="stylesheet">
     <link href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
     <link href="/static/build/app.css" rel="stylesheet">
     {% block css %}{% endblock %}
@@ -26,7 +26,7 @@
   </head>
   <body class="site">
     <div class="site-wrap">
-      <nav class="clearfix mb2 bg-white">
+      <nav class="clearfix bg-white">
         <div class="left">
           <a href="/" class="btn py2 caps">Uncoverly</a>
         </div>
@@ -35,9 +35,11 @@
           <a href="#!" class="btn bg-darken-1 mt1 mb1 mr1">Log in</a>
         </div>
       </nav>
-      <div class="container px2 py3">
-        {% block content %}{% endblock %}
+      {% block content %}
+      <div class="container px2 py4">
+        {% block container %}{% endblock %}
       </div>
+      {% endblock %}
     </div>
     {% include 'web/_includes/footer.html' %}
     {% block jsconfig %}{% endblock %}

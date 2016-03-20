@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.views.generic import ListView, View
 
@@ -14,6 +15,11 @@ class FavoritesView(ListView):
     def get_queryset(self):
         qs = super(FavoritesView, self).get_queryset()
         return qs.filter(user_id=self.request.user.pk)
+
+    def get_context_data(self, **kwargs):
+        context = super(FavoritesView, self).get_context_data(**kwargs)
+        context['user'] = User.objects.get(pk=1)  # FIXME
+        return context
 
 
 class FavoriteView(View):

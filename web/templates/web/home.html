@@ -1,7 +1,7 @@
 {% extends 'web/base.html' %}
 
 
-{% block content %}
+{% block container %}
 {% if request.user.is_authenticated %}
 <div>{{ request.user }} <a href="{% url 'web:logout' %}">Logout</a></div>
 {% else %}
@@ -23,30 +23,30 @@
 </div>
 
 <div class="flex flex-wrap mxn2">
-    {% for p in products %}
-    <div class="col-6 sm-col-4 border-box p2">
-      <div class="bg-white border rounded">
-        {% if p.image_main %}
-          <a href="{% url 'web:product' p.pk %}">
-            <img class="block" src="{{ p.image_main }}">
+  {% for p in products %}
+  <div class="col-6 sm-col-4 border-box p2">
+    <div class="bg-white border rounded">
+      {% if p.image_main %}
+        <a href="{% url 'web:product' p.pk %}">
+          <img class="block" src="{{ p.image_main }}">
+        </a>
+      {% endif %}
+      <div class="clearfix p1">
+        <div class="right">
+          <a class="favorite black mr1" href="#" data-id='{{ p.pk }}'>
+          {% if p.pk in favorites %}
+            <i class="icon ion-ios-heart"></i>
+          {% else %}
+            <i class="icon ion-ios-heart-outline"></i>
+          {% endif %}
           </a>
-        {% endif %}
-        <div class="clearfix p1">
-          <div class="right">
-            <a class="favorite black mr1" href="#" data-id='{{ p.pk }}'>
-            {% if p.pk in favorites %}
-              <i class="icon ion-ios-heart"></i>
-            {% else %}
-              <i class="icon ion-ios-heart-outline"></i>
-            {% endif %}
-            </a>
-            <a class="black" target="_blank" href="https://www.etsy.com/listing/{{ p.pk }}"><i class="icon ion-ios-redo-outline"></i></a>
-          </div>
-          <span class="green">{{ p.price_usd }}</span>
+          <a class="black" target="_blank" href="https://www.etsy.com/listing/{{ p.pk }}"><i class="icon ion-ios-redo-outline"></i></a>
         </div>
+        <span class="green">{{ p.price_usd }}</span>
       </div>
     </div>
-    {% endfor %}
+  </div>
+  {% endfor %}
 </div>
 
 {% include 'web/_includes/pagination.html' %}

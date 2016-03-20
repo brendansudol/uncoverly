@@ -2,11 +2,39 @@
 
 
 {% block content %}
+<div class="py4 px2 bg-white border-top center">
+  {{ user.username }}
+</div>
+<div class="container px2 py4">
 {% if faves|length %}
-  <div class="border rounded">
-  {% for fave in faves %}
-    <p>{{ fave.product.pk }}</p>
+  <div class="flex flex-wrap mxn2">
+  {% for f in faves %}
+    {% with p=f.product %}
+      <div class="col-6 sm-col-4 border-box p2">
+        <div class="bg-white border rounded">
+          {% if p.image_main %}
+            <a href="{% url 'web:product' p.pk %}">
+              <img class="block" src="{{ p.image_main }}">
+            </a>
+          {% endif %}
+          <div class="clearfix p1">
+            <div class="right">
+              <a class="favorite black mr1" href="#" data-id='{{ p.pk }}'>
+              {% if p.pk in favorites %}
+                <i class="icon ion-ios-heart"></i>
+              {% else %}
+                <i class="icon ion-ios-heart-outline"></i>
+              {% endif %}
+              </a>
+              <a class="black" target="_blank" href="https://www.etsy.com/listing/{{ p.pk }}"><i class="icon ion-ios-redo-outline"></i></a>
+            </div>
+            <span class="green">{{ p.price_usd }}</span>
+          </div>
+        </div>
+      </div>
+    {% endwith %}
   {% endfor %}
   </div>
 {% endif %}
+</div>
 {% endblock %}
