@@ -1,11 +1,11 @@
 from django.conf.urls import patterns, url
 from django.views.decorators.cache import cache_page
 
+from web.views.auth import LoginView, LogoutView, SignupView
 from web.views.category import CategoriesView, CategoryView
 from web.views.favorite import FavoriteView, FavoritesView
 from web.views.find import FindView, FindsView
 from web.views.home import HomeView
-from web.views.logout import LogoutView
 from web.views.misc import (
     AboutView, ContactView, PrivacyView, TermsView
 )
@@ -35,5 +35,7 @@ urlpatterns = patterns(
     url(r'^favorites$', FavoritesView.as_view(), name='faves'),
     url(r'^find$', FindView.as_view(), name='find'),
     url(r'^finds$', FindsView.as_view(), name='finds'),
+    url(r'^login$', LoginView.as_view(), name='login'),
     url(r'^logout$', LogoutView.as_view(), name='logout'),
+    url(r'^join$', SignupView.as_view(), name='signup'),
 )

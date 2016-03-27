@@ -1,0 +1,23 @@
+{% extends 'web/base.html' %}
+{% block title %}{{ title }}{% endblock %}
+
+
+{% block container %}
+<div class="clearfix">
+  <div class="bg-white col-12 sm-col-8 md-col-6 mx-auto mb3">
+    <div class="px3 py4 center">
+      <h2 class="mt0 mb3 h1 regular">{{ headline }}</h2>
+      <div class="mb1">
+        <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-primary block col-7 mx-auto">
+          {{ btn_verb }} with Facebook
+        </a>
+      </div>
+      <div class="mb1">
+        <a href="{% url 'social:begin' 'twitter' %}" class="btn btn-primary block col-7 mx-auto">
+          {{ btn_verb }} with Twitter
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
