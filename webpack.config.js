@@ -7,10 +7,13 @@ var env = process.env.NODE_ENV == 'prod' ? 'prod' : 'dev';
 module.exports = {
   context: __dirname + "/web/static/js",
 
-  entry: './app.js',
+  entry: {
+    app: './app.js',
+    suggest: './suggest.js',
+  },
 
   output: {
-    filename: 'app.js',
+    filename: '[name].js',
     path: __dirname + "/web/static/build"
   },
 
@@ -20,7 +23,14 @@ module.exports = {
 
   module: {
     loaders: [
-      { test: /(\.js$|\.jsx$)/, exclude: /node_modules/, loader: 'babel-loader' },
+      {
+        test: /(\.js$|\.jsx$)/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+        query: {
+          presets: ['es2015', 'react']
+        }
+      },
       { test: /\.scss$/, loader: ExtractTextPlugin.extract('css!sass') }
     ]
   },

@@ -54,3 +54,13 @@ class CategoryView(ListView):
     def get_queryset(self):
         qs = super(CategoryView, self).get_queryset()
         return qs.filter(category=CATEGORIES[self.category])
+
+    def get_context_data(self, **kwargs):
+        context = super(CategoryView, self).get_context_data(**kwargs)
+
+        context['category'] = {
+            'id': self.category,
+            'display': CATEGORIES[self.category],
+        }
+
+        return context

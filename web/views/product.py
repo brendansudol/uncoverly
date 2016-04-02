@@ -27,7 +27,7 @@ class ProductView(DetailView):
         return Product.objects \
             .filter(category=category) \
             .exclude(pk=self.object.pk) \
-            .all()[:4]
+            .all()[:8]
 
     def more_by_seller(self):
         seller = self.object.seller
