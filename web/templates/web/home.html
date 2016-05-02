@@ -2,16 +2,7 @@
 
 
 {% block container %}
-{% if request.user.is_authenticated %}
-<div>{{ request.user }} <a href="{% url 'web:logout' %}">Logout</a></div>
-{% else %}
-<div>
-    <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Login with Facebook</a><br>
-    <a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}">Login with Twitter</a>
-</div>
-{% endif %}
-
-<div class="clearfix mxn1">
+<div class="clearfix mxn1 mb1">
   <div class="sm-col">
     <a href="#!" class="btn p1 regular">Discover</a>
     <span>&middot;</span>
@@ -25,9 +16,8 @@
 </div>
 
 {% if category %}
-<div class="p2 bg-white">
-  <h2 class="m0">TODO: {{ category }}</h2>
-  <div></div>
+<div class="p2 bg-white center">
+  <h3 class="m0">{{ category.display }}</h3>
 </div>
 {% endif %}
 

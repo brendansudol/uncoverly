@@ -58,9 +58,11 @@ class CategoryView(ListView):
     def get_context_data(self, **kwargs):
         context = super(CategoryView, self).get_context_data(**kwargs)
 
-        context['category'] = {
-            'id': self.category,
-            'display': CATEGORIES[self.category],
-        }
+        context.update({
+            'category': {
+                'id': self.category,
+                'display': CATEGORIES[self.category],
+            },
+        })
 
         return context
