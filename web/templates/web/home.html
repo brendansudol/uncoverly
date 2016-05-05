@@ -4,31 +4,33 @@
 {% block container %}
 <div class="clearfix mxn1 mb1">
   <div class="sm-col">
-    <a href="#!" class="btn p1 regular">Discover</a>
+    <a href="#!" class="btn p1 {{ category|yesno:"regular,bold" }}">Discover</a>
     <span>&middot;</span>
-    <a href="#!" class="btn p1 regular">Categories</a>
+    <a href="#!" class="btn p1 {{ category|yesno:"bold,regular" }}">Categories</a>
   </div>
   <div class="sm-col-right">
     <a href="#!" class="btn p1 regular">Under $50</a>
     <span>&middot;</span>
-    <a href="#!" class="btn p1 regular">Everything</a>
+    <a href="#!" class="btn p1 bold">Everything</a>
   </div>
 </div>
 
 {% if category %}
-<div class="p2 bg-white center">
+<div class="p2 mb2 bg-white center">
   <h3 class="m0">{{ category.display }}</h3>
 </div>
 {% endif %}
 
 <div class="flex flex-wrap mxn2">
   {% for p in products %}
-  <div class="col-6 sm-col-4 border-box p2">
-    <div class="bg-white border rounded">
+  <div class="col-6 sm-col-4 border-box px2">
+    <div class="bg-white border rounded mb3">
       {% if p.image_main %}
+      <div class="img-cntnr ratio-34-27">
         <a href="{% url 'web:product' p.pk %}">
           <img class="block" src="{{ p.image_main }}">
         </a>
+      </div>
       {% endif %}
       <div class="clearfix p1">
         <div class="right">

@@ -13,4 +13,6 @@ node_modules
 secrets
 TODO
 venv
+
+web/management/commands/refresh_products.py
 web/static/build

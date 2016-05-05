@@ -1,13 +1,17 @@
 @charset "UTF-8";
 
-@import 'basscss';
 @import 'variables';
 
-@import 'base';
-@import 'media-queries';
-@import 'tooltip';
-@import 'modal';
-@import 'misc';
-@import 'footer';
+@import 'basscss/basscss';
 
+@import 'util/widths';
+
+@import 'base';
+
+@import 'footer';
+@import 'imgs';
+@import 'misc';
+@import 'media-queries';
+@import 'modal';
 @import 'navigation';
+@import 'tooltip';
