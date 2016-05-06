@@ -1,0 +1,22 @@
+<div class="bg-white border rounded mb3">
+  {% if p.image_main %}
+  <div class="img-cntnr ratio-34-27">
+    <a href="{% url 'web:product' p.pk %}">
+      <img class="block" src="{{ p.image_main }}">
+    </a>
+  </div>
+  {% endif %}
+  <div class="clearfix p1">
+    <div class="right">
+      <a class="favorite black mr1" href="#" data-id='{{ p.pk }}'>
+      {% if p.pk in favorites %}
+        <i class="icon ion-ios-heart"></i>
+      {% else %}
+        <i class="icon ion-ios-heart-outline"></i>
+      {% endif %}
+      </a>
+      <a class="black" target="_blank" href="https://www.etsy.com/listing/{{ p.pk }}"><i class="icon ion-ios-redo-outline"></i></a>
+    </div>
+    <span class="green">{{ p.price_usd }}</span>
+  </div>
+</div>

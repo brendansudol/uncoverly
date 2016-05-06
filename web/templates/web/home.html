@@ -4,9 +4,9 @@
 {% block container %}
 <div class="clearfix mxn1 mb1">
   <div class="sm-col">
-    <a href="#!" class="btn p1 {{ category|yesno:"regular,bold" }}">Discover</a>
+    <a href="{% url 'web:home' %}" class="btn p1 {{ category|yesno:"regular,bold" }}">Discover</a>
     <span>&middot;</span>
-    <a href="#!" class="btn p1 {{ category|yesno:"bold,regular" }}">Categories</a>
+    <a href="{% url 'web:categories' %}" class="btn p1 {{ category|yesno:"bold,regular" }}">Categories</a>
   </div>
   <div class="sm-col-right">
     <a href="#!" class="btn p1 regular">Under $50</a>
@@ -22,30 +22,9 @@
 {% endif %}
 
 <div class="flex flex-wrap mxn2">
-  {% for p in products %}
+  {% for product in products %}
   <div class="col-6 sm-col-4 border-box px2">
-    <div class="bg-white border rounded mb3">
-      {% if p.image_main %}
-      <div class="img-cntnr ratio-34-27">
-        <a href="{% url 'web:product' p.pk %}">
-          <img class="block" src="{{ p.image_main }}">
-        </a>
-      </div>
-      {% endif %}
-      <div class="clearfix p1">
-        <div class="right">
-          <a class="favorite black mr1" href="#" data-id='{{ p.pk }}'>
-          {% if p.pk in favorites %}
-            <i class="icon ion-ios-heart"></i>
-          {% else %}
-            <i class="icon ion-ios-heart-outline"></i>
-          {% endif %}
-          </a>
-          <a class="black" target="_blank" href="https://www.etsy.com/listing/{{ p.pk }}"><i class="icon ion-ios-redo-outline"></i></a>
-        </div>
-        <span class="green">{{ p.price_usd }}</span>
-      </div>
-    </div>
+    {% include "web/_includes/product-card.html" with p=product %}
   </div>
   {% endfor %}
 </div>

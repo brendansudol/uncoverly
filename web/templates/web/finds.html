@@ -1,12 +1,29 @@
 {% extends 'web/base.html' %}
 
 
-{% block container %}
-{% if finds|length %}
-  <div class="border rounded">
-  {% for find in finds %}
-    <p>{{ find.product.pk }}</p>
-  {% endfor %}
+{% block content %}
+{% include "web/_includes/user-banner.html" %}
+<div class="container px2 py3">
+  <div class="clearfix mxn1 mb1">
+    <div class="sm-col">
+      <a href="{% url 'web:faves' %}" class="btn p1 regular">Favorites</a> &middot;
+      <a href="{% url 'web:finds' %}" class="btn p1 bold">Finds</a>
+    </div>
   </div>
-{% endif %}
+  {% if finds|length %}
+    <div class="flex flex-wrap mxn2">
+    {% for f in finds %}
+      {% with p=f.product %}
+        <div class="col-6 sm-col-4 border-box px2">
+          {% include "web/_includes/product-card.html" with p=p %}
+        </div>
+      {% endwith %}
+    {% endfor %}
+    </div>
+  {% else %}
+    <div class="bg-blue white p2">
+      <strong>Oh no!</strong> There's nothing here.
+    </div>
+  {% endif %}
+</div>
 {% endblock %}
