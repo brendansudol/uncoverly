@@ -1,6 +1,7 @@
 from django.views.generic.detail import DetailView
 
 from web.models import Product
+from web.util.categories import CATEGORY_TO_ID
 
 
 class ProductView(DetailView):
@@ -14,6 +15,7 @@ class ProductView(DetailView):
         context.update({
             'more_category': self.more_by_category(),
             'more_seller': self.more_by_seller(),
+            'cat_id': CATEGORY_TO_ID.get(self.object.category),
         })
 
         return context

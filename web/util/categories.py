@@ -18,3 +18,5 @@ CATEGORIES = {
     'weddings': 'Weddings',
     'woodworking': 'Woodworking'
 }
+
+CATEGORY_TO_ID = dict((v, k) for k, v in CATEGORIES.items())
