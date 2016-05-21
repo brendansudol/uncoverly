@@ -17,6 +17,10 @@
       </a>
       <a class="black" target="_blank" href="https://www.etsy.com/listing/{{ p.pk }}"><i class="icon ion-ios-redo-outline"></i></a>
     </div>
-    <span class="green">{{ p.price_usd }}</span>
+    {% if p.price_usd %}
+    <span class="green">{{ p.price_display }}</span>
+    {% else %}
+    <span class="gray">N/A</span>
+    {% endif %}
   </div>
 </div>

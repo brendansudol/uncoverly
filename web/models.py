@@ -71,6 +71,11 @@ class Product(ModelBase):
         if self.image_main:
             return self.image_main.replace("340x270", "570xN")
 
+    @property
+    def price_display(self):
+        if self.price_usd:
+            return '${}'.format(round(self.price_usd / 100.0))
+
 
 class Favorite(ModelBase):
     product = models.ForeignKey(Product, related_name='favorites')

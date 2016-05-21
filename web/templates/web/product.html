@@ -19,7 +19,11 @@
         {{ product.title }}
       </div>
       <div class="mb2">
-        <a class="btn btn-primary" href="#!">${{ product.price_usd }}</a>
+      {% if product.price_usd %}
+        <a class="btn btn-primary" href="#!">{{ product.price_display }} →</a>
+      {% else %}
+        <a class="btn btn-primary bg-gray" href="#!">N/A →</a>
+      {% endif %}
       </div>
       <div class="mb2">
         <a class="btn btn-outline" href="#!"><i class="icon ion-ios-heart-outline"></i> Like</a>
