@@ -26,18 +26,3 @@ class HomeView(ListView):
                 pass
 
         return qs
-
-    def get_context_data(self, **kwargs):
-        context = super(HomeView, self).get_context_data(**kwargs)
-        context['favorites'] = self.get_user_faves()
-        return context
-
-    def get_user_faves(self):
-        if not self.request.user.is_authenticated():
-            return []
-
-        favorites = self.request.user.favorites \
-            .filter(product_id__in=(i.pk for i in self.get_queryset())) \
-            .values_list('product_id', flat=True)
-
-        return favorites
