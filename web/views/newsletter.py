@@ -1,8 +1,12 @@
-import mailchimp
+import logging
 
 from django.conf import settings
 from django.http import JsonResponse
 from django.views.generic import View
+import mailchimp
+
+
+logger = logging.getLogger(__name__)
 
 
 class NewsletterView(View):
@@ -11,13 +15,14 @@ class NewsletterView(View):
 
         try:
             self.subscribe(email)
-            outcome = 'success'
+            status = 'success'
         except mailchimp.ListAlreadySubscribedError:
-            outcome = 'already_member'
-        except Exception:
-            outcome = 'error'
+            status = 'success'
+        except Exception as e:
+            logger.warning('error subscribing to newsletter: {}'.format(e))
+            status = 'success'
 
-        return JsonResponse({'outcome': outcome})
+        return JsonResponse({'status': status})
 
     def subscribe(self, email):
         m = mailchimp.Mailchimp(settings.MAILCHIMP_API_KEY)

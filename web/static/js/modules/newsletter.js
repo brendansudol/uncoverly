@@ -29,7 +29,7 @@ var Newsletter = {
     },
 
     handleResponse: function(r) {
-        if (r.outcome == 'success') this.success();
+        if (r.status === 'success') this.success();
         else this.fail();
     },
 
