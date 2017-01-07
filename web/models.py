@@ -91,3 +91,17 @@ class Find(ModelBase):
 
     class Meta:
         unique_together = ('product', 'user')
+
+
+# add method(s) to User class
+class UserFunctions:
+    @property
+    def avatar(self):
+        social = self.social_auth.first()
+
+        if not social:
+            return
+
+        return social.extra_data.get('avatar')
+
+User.__bases__ += (UserFunctions,)

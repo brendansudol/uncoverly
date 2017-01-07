@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from django.views.decorators.cache import cache_page
+# from django.views.decorators.cache import cache_page
 
 from web.views.auth import LoginView, LogoutView, SignupView
 from web.views.category import CategoriesView, CategoryView
@@ -32,9 +32,17 @@ urlpatterns = patterns(
     url(r'^s/(?P<pk>[\w/\-]+)?$', SellerView.as_view(), name='seller'),
     url(r'^p/(?P<pk>[\w/\-]+)?$', ProductView.as_view(), name='product'),
     url(r'^favorite/(?P<pid>[\w/\-]+)?$', FavoriteView.as_view(), name='fave'),
-    url(r'^favorites$', FavoritesView.as_view(), name='faves'),
+    url(
+        r'^u/(?P<uid>[\w/\-]+)/favorites$',
+        FavoritesView.as_view(),
+        name='faves'
+    ),
     url(r'^find$', FindView.as_view(), name='find'),
-    url(r'^finds$', FindsView.as_view(), name='finds'),
+    url(
+        r'^u/(?P<uid>[\w/\-]+)/finds$',
+        FindsView.as_view(),
+        name='finds'
+    ),
     url(r'^login$', LoginView.as_view(), name='login'),
     url(r'^logout$', LogoutView.as_view(), name='logout'),
     url(r'^join$', SignupView.as_view(), name='signup'),

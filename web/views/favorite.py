@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.views.generic import ListView, View
+from django.shortcuts import redirect
 
 from web.models import Favorite
 
@@ -12,13 +13,21 @@ class FavoritesView(ListView):
     paginate_by = 25
     template_name = 'web/faves.html'
 
+    def dispatch(self, *args, **kwargs):
+        self.owner_id = self.kwargs['uid']
+        try:
+            self.owner = User.objects.get(pk=self.owner_id)
+        except Exception:
+            return redirect('web:home')
+        return super(FavoritesView, self).dispatch(*args, **kwargs)
+
     def get_queryset(self):
         qs = super(FavoritesView, self).get_queryset()
-        return qs.filter(user_id=self.request.user.pk)
+        return qs.filter(user_id=self.owner_id)
 
     def get_context_data(self, **kwargs):
         context = super(FavoritesView, self).get_context_data(**kwargs)
-        context['user'] = User.objects.get(pk=1)  # FIXME
+        context['owner'] = self.owner
         return context
 
 

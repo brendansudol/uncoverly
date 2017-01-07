@@ -6,8 +6,8 @@
 <div class="container px2 py3">
   <div class="clearfix mxn1 mb1">
     <div class="sm-col">
-      <a href="{% url 'web:faves' %}" class="btn p1 regular">Favorites</a> &middot;
-      <a href="{% url 'web:finds' %}" class="btn p1 bold">Finds</a>
+      <a href="{% url 'web:faves' owner.pk %}" class="btn p1 regular">Favorites</a> &middot;
+      <a href="{% url 'web:finds' owner.pk %}" class="btn p1 bold">Finds</a>
     </div>
   </div>
   {% if finds|length %}
