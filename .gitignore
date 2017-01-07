@@ -9,6 +9,7 @@ __pycache__/
 *.log
 
 local
+misc
 node_modules
 secrets
 TODO
