@@ -17,7 +17,15 @@ class Etsy(object):
     def request(self, method, params=None, timeout=5):
         url = self.request_url(method, params)
         logger.info('url: {}'.format(url))
-        return requests.get(url, timeout=timeout).json()
+        res = requests.get(url, timeout=timeout)
+
+        if res.status_code != 200:
+            logger.warn('uh-oh! status: {}, reason: {}'.format(
+                res.status_code, res.text
+            ))
+            return
+
+        return res.json()
 
     def request_url(self, method, params=None):
         url = '{endpoint}{method}?api_key={api_key}{params}'.format(
@@ -33,3 +41,13 @@ class Etsy(object):
 
     def get_listing_images(self, listing_id):
         return self.request('listings/{}/images'.format(listing_id))
+
+    def get_shop_details(self, shop_id):
+        path = 'shops/{}'.format(shop_id)
+        d = self.request(path)
+
+        if not d:
+            return
+
+        d['shop_about'] = self.request('{}/about'.format(path))
+        return d
