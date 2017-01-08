@@ -21,9 +21,10 @@
     {% endfor %}
     </div>
   {% else %}
-    <div class="bg-blue white p2">
+    <div class="bg-green white p2">
       <strong>Oh no!</strong> There's nothing here.
     </div>
   {% endif %}
+  {% include 'web/_includes/pagination.html' %}
 </div>
 {% endblock %}

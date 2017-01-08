@@ -10,7 +10,7 @@ class FavoritesView(ListView):
     context_object_name = 'faves'
     model = Favorite
     ordering = '-updated'
-    paginate_by = 25
+    paginate_by = 2
     template_name = 'web/faves.html'
 
     def dispatch(self, *args, **kwargs):

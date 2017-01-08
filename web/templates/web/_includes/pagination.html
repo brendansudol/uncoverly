@@ -2,7 +2,7 @@
 
 
 {% if is_paginated %}
-<div class="pagination py2">
+<div class="pagination py1">
   <div class="inline-block overflow-hidden bg-white border rounded">
     {% if page_obj.has_previous %}
     <a href="{% make_url request.path page_obj.previous_page_number query %}" class="left btn border-right">
