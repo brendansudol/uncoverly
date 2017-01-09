@@ -42,12 +42,20 @@ class Etsy(object):
     def get_listing_images(self, listing_id):
         return self.request('listings/{}/images'.format(listing_id))
 
-    def get_shop_details(self, shop_id):
-        path = 'shops/{}'.format(shop_id)
-        d = self.request(path)
+    def get_shop_info(self, shop_id, about=False):
+        path = 'shops/{}{}'.format(shop_id, '/about' if about else '')
+        data = self.request(path)
 
-        if not d:
+        if not data:
             return
 
-        d['shop_about'] = self.request('{}/about'.format(path))
-        return d
+        return data['results'][0]
+
+    def get_shop_info_all(self, shop_id):
+        data = self.get_shop_info(shop_id)
+
+        if not data:
+            return
+
+        data['more'] = self.get_shop_info(shop_id, about=True)
+        return data

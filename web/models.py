@@ -5,6 +5,7 @@ from random import randrange
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Q
+from jsonfield import JSONField
 
 
 class ModelBase(models.Model):
@@ -20,6 +21,10 @@ class Seller(ModelBase):
     name = models.CharField(max_length=256)
     title = models.CharField(max_length=1024, null=True, blank=True)
     icon_url = models.URLField(null=True, blank=True)
+    num_favorers = models.PositiveIntegerField(null=True, blank=True)
+    listings_all_count = models.PositiveIntegerField(null=True, blank=True)
+    story = models.TextField(null=True, blank=True)
+    social = JSONField(null=True, blank=True)
 
     def __str__(self):
         return self.id
