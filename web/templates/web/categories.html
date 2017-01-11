@@ -6,7 +6,7 @@
 {% for cat, data in products.items %}
   {% if cat != 'misc' %}
   <div class="mb4">
-    <a class="block bg-darken-1 black h4 bold py2 px3" href="{% url 'web:category' cat %}">
+    <a class="py2 px3 block bg-darken-1 black rounded-top h4 bold" href="{% url 'web:category' cat %}">
       <i class="right icon ion-chevron-right"></i>
       {{ data.display }}
     </a>

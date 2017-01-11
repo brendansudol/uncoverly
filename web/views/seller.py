@@ -15,4 +15,17 @@ class SellerView(DetailView):
             .filter(seller__pk=self.kwargs['pk']) \
             .order_by('-created')
 
+        context['site'] = self.get_site_info()
+
         return context
+
+    def get_site_info(self):
+        site = (self.object.social or {}).get('shop-website')
+
+        if not site:
+            return
+
+        return {
+            'full_url': site,
+            'display': ''.join(site.split('www.')[1:]) or site,
+        }

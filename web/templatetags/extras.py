@@ -12,3 +12,8 @@ def make_url(url, page, query=None):
         'page={}'.format(page)
     )
     return path
+
+
+@register.filter
+def get(d, k):
+    return d.get(k)

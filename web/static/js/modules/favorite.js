@@ -5,8 +5,6 @@ var Favorite = {
     endpoint_base: '/favorite/',
     csrf: $('html').data('csrf'),
     signed_out: !$('html').data('user'),
-    ico: 'ion-ios-heart',
-    ico_o: 'ion-ios-heart-outline',
 
     init: function() {
         var self = this;
@@ -47,13 +45,10 @@ var Favorite = {
     },
 
     updateSuccess: function(action) {
-        var ico = this.$btn.find('i'),
-            faved = action == 'add';
+        var ico = this.$btn.find('img'),
+            src = action === 'add' ? 'favorite' : 'favorite-outline';
 
-        var rem_cls = faved ? this.ico_o : this.ico,
-            add_cls = faved ? this.ico : this.ico_o;
-
-        ico.removeClass(rem_cls).addClass(add_cls);
+        ico.attr('src', '/static/img/ico/' + src + '.svg');
     },
 
     updateFail: function(reason) {

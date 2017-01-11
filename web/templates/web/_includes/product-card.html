@@ -8,14 +8,13 @@
   {% endif %}
   <div class="clearfix p1">
     <div class="right">
-      <a class="favorite black mr1" href="#" data-id='{{ p.pk }}'>
+      <a class="block black line-height-1 favorite" href="#" data-id='{{ p.pk }}'>
       {% if p.pk in favorites %}
-        <i class="icon ion-ios-heart"></i>
+        <img class='align-middle' src='/static/img/ico/favorite.svg' width='27' height='27'>
       {% else %}
-        <i class="icon ion-ios-heart-outline"></i>
+        <img class='align-middle' src='/static/img/ico/favorite-outline.svg' width='27' height='27'>
       {% endif %}
       </a>
-      <a class="black" target="_blank" href="https://www.etsy.com/listing/{{ p.pk }}"><i class="icon ion-ios-redo-outline"></i></a>
     </div>
     {% if p.price_usd %}
     <span class="green">{{ p.price_display }}</span>

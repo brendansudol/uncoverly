@@ -20,7 +20,7 @@ class Command(BaseCommand):
 
         logger.info('total shops: {}'.format(len(sellers)))
 
-        for i, s in enumerate(sellers[:100]):
+        for i, s in enumerate(sellers[:200]):
             logger.info('{}...\n'.format(s.id))
             data = etsy.get_shop_info_all(s.id)
 

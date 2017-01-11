@@ -21,8 +21,8 @@
     {% endfor %}
     </div>
   {% else %}
-    <div class="bg-green white p2">
-      <strong>Oh no!</strong> There's nothing here.
+    <div class="p2 bg-darken-1 rounded">
+      😳 {{ owner.username }} doesn't have any yet
     </div>
   {% endif %}
   {% include 'web/_includes/pagination.html' %}

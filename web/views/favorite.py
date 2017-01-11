@@ -9,8 +9,8 @@ from web.models import Favorite
 class FavoritesView(ListView):
     context_object_name = 'faves'
     model = Favorite
-    ordering = '-updated'
-    paginate_by = 2
+    ordering = '-created'
+    paginate_by = 12
     template_name = 'web/faves.html'
 
     def dispatch(self, *args, **kwargs):

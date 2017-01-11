@@ -11,7 +11,7 @@ class FindsView(ListView):
     context_object_name = 'finds'
     model = Find
     ordering = '-created'
-    paginate_by = 25
+    paginate_by = 12
     template_name = 'web/finds.html'
 
     def dispatch(self, *args, **kwargs):
