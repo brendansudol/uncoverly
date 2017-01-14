@@ -1,8 +1,11 @@
 {% extends 'web/base.html' %}
 
+{% block callout %}
+{% include 'web/_includes/welcome.html' %}
+{% endblock %}
 
 {% block container %}
-<div class="clearfix mxn1 mb1">
+<div class="mb1 clearfix mxn1">
   <div class="sm-col">
     <a href="{% url 'web:home' %}" class="btn p1 {{ category|yesno:"regular,bold" }}">Discover</a>
     <span>&middot;</span>

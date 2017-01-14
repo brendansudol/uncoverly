@@ -56,8 +56,9 @@
           </div>
         </div>
       </nav>
+      {% block callout %}{% endblock %}
       {% block content %}
-      <div class="container px2 py4">
+      <div class="container px2 py3">
         {% block container %}{% endblock %}
       </div>
       {% endblock %}
