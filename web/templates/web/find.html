@@ -8,13 +8,12 @@
     <div class="h4 mb2">
       If you find something you love on Etsy and it's not on Uncoverly, let us know! If it's awesome, we'll add it and give you the credit.
     </div>
-    <div id="content"></div>
+    <form class="flex mb2" action="/find" method="post">
+      {% csrf_token %}
+      <label for="url" class="hide">URL</label>
+      <input type="text" name="url" class="flex-auto m0 field rounded-left" placeholder="URL" />
+      <button type="submit" class="btn btn-primary rounded-right">Go</button>
+    </form>
   </div>
 </div>
-{% endblock %}
-
-
-{% block footerjs %}
-{{ block.super }}
-<script src="/static/build/suggest.js"></script>
 {% endblock %}

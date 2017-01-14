@@ -1,0 +1,31 @@
+{% extends 'web/base.html' %}
+
+
+{% block container %}
+<h2 class='mt1 mb3'>Featured shops <small class='h4 regular'>{{ today }}</small></h2>
+<div class='clearfix mxn2'>
+  {% for s in sellers %}
+    <div class='sm-col sm-col-6 px2 mb3'>
+      <a class="p2 block bg-darken-1 black rounded-top h4 bold" href="{% url 'web:seller' s.pk %}">
+        <i class="right icon ion-chevron-right"></i>
+        {{ s.name }}
+      </a>
+      <div class="clearfix bg-white">
+        {% for p in s.products.all|slice:':4' %}
+          <div class="col col-4 sm-col-3">
+            <div class="bg-white">
+              {% if p.image_main %}
+                <div class="img-cntnr ratio-34-27">
+                  <a href="{% url 'web:product' p.pk %}">
+                    <img class="block" src="{{ p.image_main }}">
+                  </a>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}
