@@ -61,9 +61,9 @@
         {% block container %}{% endblock %}
       </div>
       {% endblock %}
+      {% include 'web/_includes/modal.html' %}
     </div>
     {% include 'web/_includes/footer.html' %}
-    {% block jsconfig %}{% endblock %}
     {% block footerjs %}<script src="/static/build/app.js"></script>{% endblock %}
   </body>
 </html>

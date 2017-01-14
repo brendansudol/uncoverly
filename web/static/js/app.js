@@ -1,18 +1,16 @@
-/*
- * styles
- */
+// old stuff
 
-require('../sass/app.scss');
+import './vendor/collapse'
+import './vendor/dropdown'
+import './vendor/modal'
 
+import './modules/favorite'
+import './modules/newsletter'
 
-/*
- * js
- */
+// newer stuff
 
-require('./vendor/collapse');
-require('./vendor/dropdown');
-require('./vendor/modal');
+import './modules/find'
 
+// stylez
 
-require('./modules/favorite');
-require('./modules/newsletter');
+import '../sass/app.scss'

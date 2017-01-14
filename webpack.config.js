@@ -1,45 +1,48 @@
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var path = require('path')
 
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var webpack = require('webpack')
 
-var env = process.env.NODE_ENV == 'prod' ? 'prod' : 'dev';
+var env = process.env.NODE_ENV || 'development'
 
-
-module.exports = {
-  context: __dirname + "/web/static/js",
-
+var config = {
+  context: path.join(__dirname, 'web/static/js'),
   entry: {
-    app: './app.js',
-    suggest: './suggest.js',
+    app: './app.js'
   },
-
   output: {
+    path: path.join(__dirname, 'web/static/build'),
     filename: '[name].js',
-    path: __dirname + "/web/static/build"
   },
-
-  resolve: {
-      extensions: ['', '.js', '.jsx']
-  },
-
   module: {
     loaders: [
       {
-        test: /(\.js$|\.jsx$)/,
-        loader: 'babel-loader',
+        test: /\.js$/,
         exclude: /node_modules/,
-        query: {
-          presets: ['es2015', 'react']
-        }
+        loader: 'babel'
       },
-      { test: /\.scss$/, loader: ExtractTextPlugin.extract('css!sass') }
+      {
+        test: /\.scss$/i,
+        loader: ExtractTextPlugin.extract(['css', 'sass'])
+      }
     ]
   },
-
   sassLoader: {
-    outputStyle: (env == 'prod' ? 'compressed' : 'expanded')
+    outputStyle: 'compressed',
+    includePaths: ['node_modules']
   },
-
   plugins: [
-    new ExtractTextPlugin("app.css")
+    new ExtractTextPlugin('app.css'),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify(env)
+      }
+    })
   ]
-};
+}
+
+if (env === 'production') {
+  config.plugins.push(new webpack.optimize.UglifyJsPlugin())
+}
+
+module.exports = config
