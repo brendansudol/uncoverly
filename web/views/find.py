@@ -1,10 +1,14 @@
+import re
+
+from urllib.parse import urlparse
+
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.generic import ListView, View
 from django.shortcuts import redirect
 
-from web.models import Find
+from web.models import Find, Product
 
 
 class FindsView(ListView):
@@ -38,14 +42,35 @@ class FindView(View):
     def get(self, request):
         return render(request, self.template_name)
 
+    # TODO - clean up, this is quite clunky
     def post(self, request):
         if not request.user.is_authenticated():
-            return self.outcome(status='fail', reason='no_auth')
+            return self.outcome('fail', reason='no_auth')
 
-        post = request.POST
-        print(post)
+        url = request.POST.get('url')
+        parsed = urlparse(url)
 
-        return self.outcome(status='incomplete')
+        if parsed.netloc != 'www.etsy.com':
+            return self.outcome('fail', reason='not_etsy')
 
-    def outcome(self, **kwargs):
-        return JsonResponse(dict(**kwargs))
+        m = re.search('www.etsy.com\/listing\/(\d+)', url)
+        if m is None:
+            return self.outcome('fail', reason='no_product')
+
+        pid = m.group(1)
+        p = Product.objects.filter(pk=pid).first()
+
+        if p and p.is_visible:
+            return self.outcome('already_live')
+
+        if p and p.finds.first():
+            return self.outcome('already_suggested')
+
+        if not p:
+            p = Product.objects.create(id=pid)
+
+        Find.objects.create(user=request.user, product=p)
+        return self.outcome('success')
+
+    def outcome(self, status, **kwargs):
+        return JsonResponse(dict(status=status, **kwargs))

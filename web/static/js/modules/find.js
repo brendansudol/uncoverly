@@ -4,6 +4,15 @@ const form = $('.js-find-form')
 const result = $('.js-find-result')
 const modal = $('#myModal')
 const isAuthed = $('html').data('user') !== ''
+const msgs = {
+  already_live: 'You have great taste — that product is already on Uncoverly.',
+  already_suggested: 'Great minds think alike — that product has already been suggested.',
+  fail: 'Sorry! We don’t recognize that Etsy listing.',
+  success: 'Thanks! We’ll take a look and let you know if it’s added.',
+  error: 'Uh-oh! Something went wrong. Please try again later.',
+}
+
+const show = msg => result.html(`<p class='bg-darken-1 p2 h6'>${msg}</p>`)
 
 const onSubmit = e => {
   e.preventDefault()
@@ -13,18 +22,12 @@ const onSubmit = e => {
     ...form.serializeArray().map(d => ({ [d.name]: d.value }))
   )
 
-  $.post('/find', data).done(handleResponse).fail(error)
+  $.post('/find', data).done(handleResponse).fail(() => show(msgs.error))
 }
 
 const handleResponse = r => {
-  if (r.error) { error(); return; }
-
-  console.log(r)
-  result.html(`<p class='red'>${JSON.stringify(r)}</p>`)
-}
-
-const error = () => {
-  console.log('error')
+  form.find('input[name=url]').val('')
+  show(msgs[r.status] || msgs.error)
 }
 
 form.on('submit', onSubmit)
