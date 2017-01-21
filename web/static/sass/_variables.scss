@@ -12,7 +12,7 @@ $fuchsia: #f012be !default;
 $purple: #b10dc9 !default;
 $maroon: #85144b !default;
 $white: #fff !default;
-$silver: #ddd !default;
+$silver: #eee !default;
 $gray: #aaa !default;
 $gray-light: #ddd !default;
 $black: #111 !default;
@@ -40,6 +40,7 @@ $h4: 1rem !default;
 $h5: .875rem !default;
 $h6: .75rem !default;
 
+$space-tiny: .25rem !default;
 $space-1: .5rem !default;
 $space-2: 1rem !default;
 $space-3: 2rem !default;
@@ -92,6 +93,7 @@ $viewport-medium: 48em;
 $viewport-large: 64em;
 $measure-width: 42rem !default;
 
+$breakpoint-xs: '(max-width: 40em)' !default;
 $breakpoint-sm: '(min-width: 40em)' !default;
 $breakpoint-md: '(min-width: 52em)' !default;
 $breakpoint-lg: '(min-width: 64em)' !default;
