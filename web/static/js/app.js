@@ -9,6 +9,7 @@ import './modules/newsletter'
 
 // newer stuff
 
+import './modules/banner'
 import './modules/find'
 
 // stylez

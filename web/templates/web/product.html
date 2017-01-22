@@ -20,17 +20,19 @@
       </div>
       <div class="mb2">
       {% if product.price_usd %}
-        <a class="btn btn-primary" href="#!">{{ product.price_display }} →</a>
+        <a class="btn btn-primary" href="#!">{{ product.price_display }} ➞</a>
       {% else %}
-        <a class="btn btn-primary bg-gray" href="#!">N/A →</a>
+        <a class="btn btn-primary bg-gray" href="#!">N/A ➞</a>
       {% endif %}
       </div>
       <div class="mb2">
-        <a class="btn btn-outline" href="#!"><i class="icon ion-ios-heart-outline"></i> Like</a>
+        <a class="btn btn-outline" href="#!">
+          <img class='align-top' src='/static/img/ico/like-no.svg' width='20' height='20'> Like
+        </a>
       </div>
       <div class="mb2">
-        <a target="_blank" href="https://twitter.com/intent/tweet?text=foo&amp;hashtags=uncoverly" class="btn btn-outline w3 center"><i class="icon ion-social-twitter"></i></a>
-        <a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u=http://www.uncoverly.com/p/186372207" class="btn btn-outline w3 center"><i class="icon ion-social-facebook"></i></a>
+        <a target="_blank" href="https://twitter.com/intent/tweet?text=foo&amp;hashtags=uncoverly" class="btn btn-outline px1 py-tiny center"><img class='align-middle' src='/static/img/ico/twitter.svg' width='16' height='16'></a>
+        <a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u=http://www.uncoverly.com/p/186372207" class="btn btn-outline px1 py-tiny center"><img class='align-middle' src='/static/img/ico/facebook.svg' width='16' height='16'></a>
       </div>
     </div>
   </div>

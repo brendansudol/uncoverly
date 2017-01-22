@@ -46,7 +46,7 @@ var Favorite = {
 
     updateSuccess: function(action) {
         var ico = this.$btn.find('img'),
-            src = action === 'add' ? 'favorite' : 'favorite-outline';
+            src = action === 'add' ? 'like-yes' : 'like-no';
 
         ico.attr('src', '/static/img/ico/' + src + '.svg');
     },

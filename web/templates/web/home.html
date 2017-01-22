@@ -1,7 +1,9 @@
 {% extends 'web/base.html' %}
 
 {% block callout %}
-{% include 'web/_includes/welcome.html' %}
+{% if not request.COOKIES.hide_banner %}
+  {% include 'web/_includes/welcome.html' %}
+{% endif %}
 {% endblock %}
 
 {% block container %}
