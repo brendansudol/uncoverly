@@ -9,7 +9,7 @@ var Favorite = {
     init: function() {
         var self = this;
 
-        $('.favorite').click(function(e) {
+        $('.js-favorite').click(function(e) {
             self.handleClick(e, this);
         });
     },
