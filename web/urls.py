@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, url
 # from django.views.decorators.cache import cache_page
 
+from web.views.about import AboutView
 from web.views.auth import LoginView, LogoutView, SignupView
 from web.views.category import CategoriesView, CategoryView
 from web.views.favorite import FavoriteView, FavoritesView
@@ -8,7 +9,7 @@ from web.views.featured import FeaturedSellerView
 from web.views.find import FindView, FindsView
 from web.views.home import HomeView
 from web.views.misc import (
-    AboutView, ContactView, PrivacyView, TermsView
+    ContactView, PrivacyView, TermsView
 )
 from web.views.newsletter import NewsletterView
 from web.views.product import ProductView

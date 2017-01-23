@@ -1,19 +1,17 @@
 {% extends 'web/base.html' %}
 
 {% block container %}
-<div class="clearfix">
-  <div class="col-12 sm-col-8 md-col-6 mx-auto">
-    <h2>Add your favorite products</h2>
-    <div class="h4 mb2">
-      If you find something you love on Etsy and it's not on Uncoverly, let us know! If it's awesome, we'll add it and give you the credit.
-    </div>
-    <form class="flex mb2 js-find-form" action="/find" method="post">
-      {% csrf_token %}
-      <label for="url" class="hide">URL</label>
-      <input type="text" name="url" class="flex-auto m0 field rounded-left" placeholder="Etsy URL" required />
-      <button type="submit" class="btn btn-primary rounded-right">Go</button>
-    </form>
-    <div class='js-find-result'></div>
+<div class="sm-col-8 md-col-6 mx-auto">
+  <h2>Add your favorite products</h2>
+  <div class="h4 mb2">
+    If you find something you love on Etsy and it's not on Uncoverly, let us know! If it's awesome, we'll add it and give you the credit.
   </div>
+  <form class="flex mb2 js-find-form" action="/find" method="post">
+    {% csrf_token %}
+    <label for="url" class="hide">URL</label>
+    <input type="text" name="url" class="flex-auto m0 field rounded-left" placeholder="Etsy URL" required />
+    <button type="submit" class="btn btn-primary rounded-right">Go</button>
+  </form>
+  <div class='js-find-result'></div>
 </div>
 {% endblock %}
