@@ -87,16 +87,15 @@ $width-2: 32rem !default;
 $width-3: 48rem !default;
 $width-4: 64rem !default;
 
-$viewport-small: 32em;
-$viewport-medium: 48em;
-$viewport-large: 64em;
-$measure-width: 42rem !default;
+$viewport-small: 32rem;
+$viewport-medium: 48rem;
+$viewport-large: 64rem;
 
-$breakpoint-xs: '(max-width: 40em)' !default;
-$breakpoint-sm: '(min-width: 40em)' !default;
-$breakpoint-md: '(min-width: 52em)' !default;
-$breakpoint-lg: '(min-width: 64em)' !default;
-$breakpoint-sm-md: '(min-width: 40em) and (max-width: 52em)' !default;
-$breakpoint-md-lg: '(min-width: 52em) and (max-width: 64em)' !default;
+$breakpoint-xs: '(max-width: 40rem)' !default;
+$breakpoint-sm: '(min-width: 40rem)' !default;
+$breakpoint-md: '(min-width: 52rem)' !default;
+$breakpoint-lg: '(min-width: 64rem)' !default;
+$breakpoint-sm-md: '(min-width: 40rem) and (max-width: 52rem)' !default;
+$breakpoint-md-lg: '(min-width: 52rem) and (max-width: 64rem)' !default;
 
-$container-width: 960px !default;
+$container-width: 1060px !default;

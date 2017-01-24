@@ -19,37 +19,20 @@
   </head>
   <body class="site">
     <div class="site-wrap">
-      <nav class="navbar navbar-app navbar-static-top">
-        <div class="container px2">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand caps bold black" href="/">Uncoverly</a>
-          </div>
-          <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav navbar-right">
-              {% if user.is_authenticated %}
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user.username }} <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="{% url 'web:faves' user.pk %}">Favorites</a></li>
-                  <li><a href="{% url 'web:finds' user.pk %}">Finds</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="{% url 'web:logout' %}">Log out</a></li>
-                </ul>
-              </li>
-              {% else %}
-              <li><a href="{% url 'web:signup' %}">Join</a></li>
-              <li><a href="{% url 'web:login' %}">Log in</a></li>
-              {% endif %}
-            </ul>
+      <header class='py1 bg-white'>
+        <div class='container px2 md-flex flex-baseline'>
+          <a href="{% url 'web:home' %}" class='flex-auto h5 caps bold black'>Uncoverly</a>
+          <div class='mxn1'>
+            {% if user.is_authenticated %}
+              <a href="{% url 'web:faves' user.pk %}" class="btn px1 py0 h6 regular">Favorites</a>
+              <a href="{% url 'web:finds' user.pk %}" class="btn px1 py0 h6 regular">Finds</a>
+            {% else %}
+              <a href="{% url 'web:signup' %}" class="btn px1 py0 h6 regular">Join</a>
+              <a href="{% url 'web:login' %}" class="btn px1 py0 h6 regular">Log in</a>
+            {% endif %}
           </div>
         </div>
-      </nav>
+      </header>
       {% block callout %}{% endblock %}
       {% block content %}
       <div class="container px2 py3">
