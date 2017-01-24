@@ -11,3 +11,8 @@ html { font-size: $base-font-size; }
 @media screen and (min-width: $viewport-large) {
   html { font-size: 20px; }
 }
+
+@media #{$breakpoint-sm} {
+  .sm-h2 { font-size: $h2; }
+  .sm-center { text-align: center; }
+}
