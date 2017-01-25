@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" 
-      data-csrf="{{ csrf_token }}" 
-      data-user="{% firstof request.user.pk '' %}">
+<html lang="en" data-csrf="{{ csrf_token }}" data-user="{% firstof request.user.pk '' %}">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

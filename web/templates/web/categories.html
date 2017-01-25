@@ -8,7 +8,7 @@
   <div class="mb4">
     <a class="py2 px3 block bg-darken-1 black rounded-top h4 bold" href="{% url 'web:category' cat %}">
       <i class="right icon ion-chevron-right"></i>
-      {{ data.display }}
+      <span>{{ data.display }}</span>
     </a>
     <div class="clearfix">
     {% for p in data.products %}
