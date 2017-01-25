@@ -152,3 +152,6 @@ MAILCHIMP_API_KEY = os.environ.get('MAILCHIMP_API_KEY')
 MAILCHIMP_LIST_ID = os.environ.get('MAILCHIMP_LIST_ID')
 
 ETSY_API_KEY = os.environ.get('ETSY_API_KEY')
+
+S3_ACCESS_KEY = os.environ.get('S3_ACCESS_KEY')
+S3_SECRET_KEY = os.environ.get('S3_SECRET_KEY')
