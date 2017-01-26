@@ -24,58 +24,61 @@
 </div>
 {% endif %}
 
-<div class='mb3'>
-  <div class='clearfix bg-white'>
-    <div class='col col-12 sm-col-7 p3'>
-      <img class='col-12' src='{{ product.image_lg }}'>
+<div class='mb3 clearfix bg-white'>
+  <div class='col col-12 sm-col-7 p3'>
+    <img class='col-12' src='{{ product.image_lg }}'>
+  </div>
+  <div class='col col-12 sm-col-5 p3'>
+    <div class='h4 mb2'>
+      {{ product.title|lower }}
     </div>
-    <div class='col col-12 sm-col-5 p3'>
-      <div class='h4 mb2'>
-        {{ product.title|lower }}
-      </div>
-      <div class='mb2'>
-      {% if product.price_usd %}
-        <a class='btn btn-primary' href='#!'>{{ product.price_display }} ➞</a>
-      {% else %}
-        <a class='btn btn-primary bg-gray' href='#!'>N/A ➞</a>
-      {% endif %}
-      </div>
-      <div class='mb2'>
-        <a class='btn btn-outline border-gray h5 regular js-favorite' href='#!' data-id='{{ product.pk }}'>
-          {% if product.pk in favorites %}
-            <img class='align-top mr-tiny' src='/static/img/ico/like-yes.svg' width='22' height='22'>
-          {% else %}
-            <img class='align-top mr-tiny' src='/static/img/ico/like-no.svg' width='22' height='22'>
-          {% endif %}
-          Like
-        </a>
-      </div>
-      <div class='mb2'>
-        <a target='_blank' href="https://twitter.com/intent/tweet?url={{ request.url|urlencode }}&text={{ 'I ❤️ this!'|urlencode }}&via=uncoverly" class='btn btn-outline border-gray px1 py-tiny center'><img class='align-middle' src='/static/img/ico/twitter.svg' width='16' height='16'></a>
-        <a target='_blank' href='http://www.facebook.com/sharer/sharer.php?u=http://www.uncoverly.com/p/186372207' class='btn btn-outline border-gray px1 py-tiny center'><img class='align-middle' src='/static/img/ico/facebook.svg' width='16' height='16'></a>
-      </div>
+    <div class='mb2'>
+    {% if product.price_usd %}
+      <a class='btn btn-primary' href='#!'>{{ product.price_display }} ➞</a>
+    {% else %}
+      <a class='btn btn-primary bg-gray' href='#!'>N/A ➞</a>
+    {% endif %}
+    </div>
+    <div class='mb2'>
+      <a class='btn btn-outline border-gray h5 regular js-favorite' href='#!' data-id='{{ product.pk }}'>
+        {% if product.pk in favorites %}
+          <img class='align-top mr-tiny' src='/static/img/ico/like-yes.svg' width='22' height='22'>
+        {% else %}
+          <img class='align-top mr-tiny' src='/static/img/ico/like-no.svg' width='22' height='22'>
+        {% endif %}
+        Like
+      </a>
+    </div>
+    <div class='mb2'>
+      <a target='_blank' href="https://twitter.com/intent/tweet?url={{ request.url|urlencode }}&text={{ 'I ❤️ this!'|urlencode }}&via=uncoverly" class='mr1 btn btn-outline border-gray px1 py-tiny center'><img class='align-middle' src='/static/img/ico/twitter.svg' width='16' height='16'></a>
+      <a target='_blank' href='http://www.facebook.com/sharer/sharer.php?u=http://www.uncoverly.com/p/186372207' class='btn btn-outline border-gray px1 py-tiny center'><img class='align-middle' src='/static/img/ico/facebook.svg' width='16' height='16'></a>
     </div>
   </div>
+</div>
 
-  {% if more_seller|length > 3 %}
-  <h2>More from {{ product.seller.name }}</h2>
-  <div class='clearfix mxn1'>
-  {% for p in more_seller %}
-    <div class='col col-6 sm-col-3 border-box p1'>
-      <div class='bg-white border rounded'>
-      {% if p.image_main %}
-        <a href='{% url 'web:product' p.pk %}'>
-          <img class='block' src='{{ p.image_main }}'>
-        </a>
-      {% endif %}
-      </div>
+{% if more_seller|length > 3 %}
+  <div class='mb3 p3 bg-darken-1'>
+    <div class='mb2 center'>
+      More from <strong>{{ product.seller.name }}</strong>
     </div>
-  {% endfor %}
+    <div class='clearfix'>
+    {% for p in more_seller %}
+      <div class='col col-6 sm-col-3 border-box'>
+        <div class='bg-white'>
+        {% if p.image_main %}
+          <a href='{% url 'web:product' p.pk %}'>
+            <img class='block' src='{{ p.image_main }}'>
+          </a>
+        {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+    </div>
   </div>
-  {% endif %}
+{% endif %}
 
-  {% if more_category|length %}
-  <div class='p3 bg-darken-1'>
+{% if more_category|length %}
+  <div class='mb3 p3 bg-darken-1'>
     <div class='mb2 center'>
       More from <strong>{{ product.category }}</strong>
     </div>
@@ -93,8 +96,8 @@
     {% endfor %}
     </div>
   </div>
-  {% endif %}
-</div>
+{% endif %}
+
 {% endblock %}
 
 

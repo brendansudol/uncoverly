@@ -1,3 +1,4 @@
+from collections import defaultdict
 from functools import reduce
 from operator import or_
 from random import randrange
@@ -80,6 +81,26 @@ class Product(ModelBase):
     def price_display(self):
         if self.price_usd:
             return '${}'.format(round(self.price_usd / 100.0))
+
+    @property
+    def is_eligible(self):
+        return bool(
+            self.state == 'active' and
+            self.is_awesome and
+            all([self.title, self.price_usd, self.image_main])
+        )
+
+    @classmethod
+    def update_visibility(cls):
+        results = defaultdict(int)
+        for p in cls.objects.all():
+            e, v = p.is_eligible, p.is_visible
+            if e == v:
+                continue
+            p.is_visible = e
+            p.save()
+            results['now {}'.format('visible' if e else 'hidden')] += 1
+        print(dict(results))
 
 
 class Favorite(ModelBase):
