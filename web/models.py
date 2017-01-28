@@ -1,10 +1,10 @@
 from collections import defaultdict
 from functools import reduce
 from operator import or_
-from random import randrange
+from random import randrange, shuffle
 
 from django.contrib.auth.models import User
-from django.db import models
+from django.db import models, transaction
 from django.db.models import Q
 from jsonfield import JSONField
 
@@ -101,6 +101,16 @@ class Product(ModelBase):
             p.save()
             results['now {}'.format('visible' if e else 'hidden')] += 1
         print(dict(results))
+
+    @classmethod
+    def randomize(cls):
+        products = cls.objects.all()
+        nums = list(range(len(products)))
+        shuffle(nums)
+        with transaction.atomic():
+            for i, p in enumerate(products):
+                p.rand1 = nums[i]
+                p.save()
 
 
 class Favorite(ModelBase):
