@@ -1,4 +1,5 @@
 from collections import defaultdict
+from datetime import datetime
 from functools import reduce
 from operator import or_
 from random import randrange, shuffle
@@ -65,6 +66,7 @@ class Product(ModelBase):
     image_main = models.URLField(null=True, blank=True)
     is_awesome = models.NullBooleanField()
     is_visible = models.BooleanField(default=False)
+    last_synced = models.DateTimeField(default=datetime.now, blank=True)
     rand1 = models.PositiveIntegerField(default=rand_default)
 
     objects = ProductManager()
