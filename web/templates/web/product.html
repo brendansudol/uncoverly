@@ -17,10 +17,10 @@
 
 {% block container %}
 {% if cat_id %}
-<div class='h6 mxn1'>
-  <a href='{% url 'web:home' %}' class='regular btn btn-small'>Everything</a>
+<div class='mxn1 h6'>
+  <a href='{% url 'web:home' %}' class='btn p1 regular'>Everything</a>
   <span>›</span>
-  <a href='{% url 'web:category' cat_id %}' class='regular btn btn-small'>{{ product.category }}</a>
+  <a href='{% url 'web:category' cat_id %}' class='btn p1 regular'>{{ product.category }}</a>
 </div>
 {% endif %}
 
@@ -40,18 +40,18 @@
     {% endif %}
     </div>
     <div class='mb2'>
-      <a class='btn btn-outline border-gray h5 regular js-favorite' href='#!' data-id='{{ product.pk }}'>
-        {% if product.pk in favorites %}
-          <img class='align-top mr-tiny' src='/static/img/ico/like-yes.svg' width='22' height='22'>
-        {% else %}
-          <img class='align-top mr-tiny' src='/static/img/ico/like-no.svg' width='22' height='22'>
-        {% endif %}
-        Like
+      <a class='btn btn-outline border-gray h5 regular fave-action' href='#!' data-id='{{ product.pk }}'>
+        <div class='line-height-1'>
+          <div class='inline-block align-bottom heart-cntnr {% if product.pk in favorites %}faved{% endif %}'>
+            <div class='heart'></div>
+          </div>
+          <span class='ml-tiny'>Like</span>
+        </div>
       </a>
     </div>
     <div class='mb2'>
-      <a target='_blank' href="https://twitter.com/intent/tweet?url={{ request.url|urlencode }}&text={{ 'I ❤️ this!'|urlencode }}&via=uncoverly" class='mr1 btn btn-outline border-gray px1 py-tiny center'><img class='align-middle' src='/static/img/ico/twitter.svg' width='16' height='16'></a>
-      <a target='_blank' href='http://www.facebook.com/sharer/sharer.php?u=http://www.uncoverly.com/p/186372207' class='btn btn-outline border-gray px1 py-tiny center'><img class='align-middle' src='/static/img/ico/facebook.svg' width='16' height='16'></a>
+      <a target='_blank' href="https://twitter.com/intent/tweet?url={{ request.url|urlencode }}&text={{ 'I ❤️ this!'|urlencode }}&via=uncoverly" class='mr1 btn btn-outline px1 py-tiny border-gray border-box center'><img class='align-middle' src='/static/img/ico/twitter.svg' width='14' height='14'></a>
+      <a target='_blank' href='http://www.facebook.com/sharer/sharer.php?u=http://www.uncoverly.com/p/186372207' class='btn btn-outline border-gray px1 py-tiny border-box center'><img class='align-middle' src='/static/img/ico/facebook.svg' width='14' height='14'></a>
     </div>
   </div>
 </div>

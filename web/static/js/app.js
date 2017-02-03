@@ -1,15 +1,12 @@
 // old stuff
 
-import './vendor/collapse'
-import './vendor/dropdown'
 import './vendor/modal'
-
-import './modules/favorite'
 import './modules/newsletter'
 
 // newer stuff
 
 import './modules/banner'
+import './modules/favorite'
 import './modules/find'
 
 // stylez

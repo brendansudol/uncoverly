@@ -1,0 +1,36 @@
+.heart-cntnr {
+  height: 16px;
+  overflow: hidden;
+  position: relative;
+  width: 16px
+}
+
+.heart {
+  position: absolute;
+  background: url('/static/img/ico/heart.png');
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: 2900%;
+  height: 48px;
+  width: 48px;
+  left: -100%;
+  top: -100%
+}
+
+@keyframes heart-burst {
+  0% { background-position: left; }
+  100% { background-position: right; }
+}
+
+.is-animating {
+  .heart-cntnr { overflow: visible; }
+  .heart {
+    animation-timing-function: steps(28);
+    animation-name: heart-burst;
+    animation-duration: .8s;
+    animation-iteration-count: 1;
+    display: inline-block
+  }
+}
+
+.faved .heart { background-position: right; }

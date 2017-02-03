@@ -1,61 +1,30 @@
-var $ = require('jquery');
+import $ from 'jquery'
 
-
-var Favorite = {
-    endpoint_base: '/favorite/',
-    csrf: $('html').data('csrf'),
-    signed_out: !$('html').data('user'),
-
-    init: function() {
-        var self = this;
-
-        $('.js-favorite').click(function(e) {
-            self.handleClick(e, this);
-        });
-    },
-
-    handleClick: function(e, btn) {
-        e.preventDefault();
-
-        this.$btn = $(btn);
-        this.issue_id = this.$btn.data('id');
-
-        if (this.signed_out) this.showModal();
-        else this.updateAttempt();
-    },
-
-    showModal: function() {
-        $('#myModal').modal('show');
-    },
-
-    updateAttempt: function() {
-        var self = this;
-
-        var url = this.endpoint_base + this.issue_id,
-            data = {'csrfmiddlewaretoken': this.csrf};
-
-        var posting = $.post(url, data);
-        posting.done(function(r) { self.handleResponse(r); })
-        posting.fail(function() { self.updateFail(); });
-    },
-
-    handleResponse: function(r) {
-        if (r.status == 'success') this.updateSuccess(r.action);
-        else this.updateFail(r.reason);
-    },
-
-    updateSuccess: function(action) {
-        var ico = this.$btn.find('img'),
-            src = action === 'add' ? 'like-yes' : 'like-no';
-
-        ico.attr('src', '/static/img/ico/' + src + '.svg');
-    },
-
-    updateFail: function(reason) {
-        if (!reason) reason = 'no_reason_given';
-        console.log('fave fail: ' + reason);
-    },
+const btn = $('.fave-action')
+const modal = $('#myModal')
+const isAuthed = $('html').data('user') !== ''
+const csrf = { csrfmiddlewaretoken: $('html').data('csrf') }
+const animate = {
+  cls: 'is-animating',
+  end: 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
 }
 
+const fail = why => console.log(`fave fail: ${why || 'no reason given'}`)
 
-Favorite.init();
+const onClick = e => {
+  e.preventDefault()
+  if (!isAuthed) { modal.modal('show'); return; }
+
+  const a = $(e.currentTarget)
+  $.post(`/favorite/${a.data('id')}`, csrf).done(handleResponse(a)).fail(fail)
+}
+
+const handleResponse = a => res => {
+  if (res.status !== 'success') { fail(res.reason); return; }
+
+  if (res.action === 'add') a.addClass(animate.cls)
+  a.find('.heart-cntnr').toggleClass('faved')
+}
+
+btn.on('click', onClick)
+btn.on(animate.end, e => $(e.currentTarget).removeClass(animate.cls))

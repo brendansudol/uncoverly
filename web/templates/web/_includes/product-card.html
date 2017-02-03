@@ -8,12 +8,10 @@
   {% endif %}
   <div class="clearfix p1">
     <div class="right">
-      <a class="block black line-height-1 js-favorite" href="#" data-id='{{ p.pk }}'>
-      {% if p.pk in favorites %}
-        <img class='align-middle' src='/static/img/ico/like-yes.svg' width='24'>
-      {% else %}
-        <img class='align-middle' src='/static/img/ico/like-no.svg' width='24'>
-      {% endif %}
+      <a href="#!" class="block my-tiny line-height-1 fave-action" data-id='{{ p.pk }}'>
+        <div class='heart-cntnr {% if p.pk in favorites %}faved{% endif %}'>
+          <div class='heart'></div>
+        </div>
       </a>
     </div>
     {% if p.price_usd %}
