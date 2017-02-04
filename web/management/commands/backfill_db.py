@@ -110,6 +110,7 @@ class Command(BaseCommand):
                 category=d['category'],
                 tags=d['tags'],
                 image_main=d['img'],
+                is_awesome=True,
                 seller=seller,
             )
 

@@ -76,6 +76,7 @@ class Product(ModelBase):
     is_visible = models.BooleanField(default=False)
     last_synced = models.DateTimeField(default=datetime.now, blank=True)
     rand1 = models.PositiveIntegerField(default=rand_default)
+    rand2 = models.PositiveIntegerField(default=rand_default)
 
     objects = ProductManager()
 
@@ -115,11 +116,14 @@ class Product(ModelBase):
     @classmethod
     def randomize(cls):
         products = cls.objects.all()
-        nums = list(range(len(products)))
-        shuffle(nums)
+        nums1 = list(range(len(products)))
+        nums2 = list(nums1)
+        shuffle(nums1)
+        shuffle(nums2)
         with transaction.atomic():
             for i, p in enumerate(products):
-                p.rand1 = nums[i]
+                p.rand1 = nums1[i]
+                p.rand2 = nums2[i]
                 p.save()
 
 
