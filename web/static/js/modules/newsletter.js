@@ -1,46 +1,20 @@
-var $ = require('jquery');
+import $ from 'jquery'
 
+const form = $('.js-newsletter-form')
 
-var Newsletter = {
-    form: $('#newsletter'),
-    endpoint: '/newsletter',
-    csrf: $('html').data('csrf'),
+const fail = () => console.log('subscibe fail :(')
 
-    init: function() {
-        var self = this;
-
-        this.form.submit(function(e) {
-            e.preventDefault();
-            self.submit();
-        });
-    },
-
-    submit: function() {
-        var self = this;
-
-        var data = {
-            'email': this.form.find('input').val(),
-            'csrfmiddlewaretoken': this.csrf
-        };
-
-        var posting = $.post(this.endpoint, data);
-        posting.done(function(r) { self.handleResponse(r); })
-        posting.fail(function() { self.fail(); });
-    },
-
-    handleResponse: function(r) {
-        if (r.status === 'success') this.success();
-        else this.fail();
-    },
-
-    success: function(action) {
-        this.form.find('button').html('✔');
-    },
-
-    fail: function() {
-        console.log('subscribe fail :(');
-    },
+const onSubmit = e => {
+  e.preventDefault()
+  const data = Object.assign(
+    ...form.serializeArray().map(d => ({ [d.name]: d.value }))
+  )
+  $.post('/newsletter', data).done(handleResponse).fail(fail)
 }
 
+const handleResponse = r => {
+  if (r.status !== 'success') return fail()
+  form.find('button').html('✔')
+}
 
-Newsletter.init();
+form.on('submit', onSubmit)

@@ -1,45 +1,45 @@
 <!DOCTYPE html>
-<html lang="en" data-csrf="{{ csrf_token }}" data-user="{% firstof request.user.pk '' %}">
+<html lang='en' data-csrf='{{ csrf_token }}' data-user='{% firstof request.user.pk "" %}'>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="/static/img/favicon.ico">
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='icon' href='/static/img/favicon.ico'>
     <title>{% block title %}Uncoverly{% endblock %}</title>
-    <meta name="description" content="Discover the best of Etsy, handpicked by a community that loves handmade.">
+    <meta name='description' content='Discover the best of Etsy, handpicked by a community that loves handmade.'>
     {% block head %}{% endblock %}
-    <link href="/static/build/app.css" rel="stylesheet">
+    <link href='/static/build/app.css' rel='stylesheet'>
     {% block css %}{% endblock %}
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <script src='https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js'></script>
+      <script src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js'></script>
     <![endif]-->
   </head>
-  <body class="site">
-    <div class="site-wrap">
+  <body class='site'>
+    <div class='site-wrap'>
       <header class='py1 bg-white'>
         <div class='container px2 md-flex flex-baseline'>
-          <a href="{% url 'web:home' %}" class='flex-auto h5 caps bold black'>Uncoverly</a>
+          <a href='{% url "web:home" %}' class='flex-auto h5 caps bold black'>Uncoverly</a>
           <div class='mxn1'>
             {% if user.is_authenticated %}
-              <a href="{% url 'web:faves' user.pk %}" class="btn px1 py0 h6 regular">Favorites</a>
-              <a href="{% url 'web:finds' user.pk %}" class="btn px1 py0 h6 regular">Finds</a>
+              <a href='{% url "web:faves" user.pk %}' class='btn px1 py0 h6 regular'>Favorites</a>
+              <a href='{% url "web:finds" user.pk %}' class='btn px1 py0 h6 regular'>Finds</a>
             {% else %}
-              <a href="{% url 'web:signup' %}" class="btn px1 py0 h6 regular">Join</a>
-              <a href="{% url 'web:login' %}" class="btn px1 py0 h6 regular">Log in</a>
+              <a href='{% url "web:signup" %}' class='btn px1 py0 h6 regular'>Join</a>
+              <a href='{% url "web:login" %}' class='btn px1 py0 h6 regular'>Log in</a>
             {% endif %}
           </div>
         </div>
       </header>
       {% block callout %}{% endblock %}
       {% block content %}
-      <div class="container px2 py3">
+      <div class='container px2 py3'>
         {% block container %}{% endblock %}
       </div>
       {% endblock %}
       {% include 'web/_includes/modal.html' %}
     </div>
     {% include 'web/_includes/footer.html' %}
-    {% block footerjs %}<script src="/static/build/app.js"></script>{% endblock %}
+    {% block footerjs %}<script src='/static/build/app.js'></script>{% endblock %}
   </body>
 </html>

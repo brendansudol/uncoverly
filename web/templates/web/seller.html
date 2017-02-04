@@ -1,9 +1,8 @@
 {% extends 'web/base.html' %}
 {% load extras %}
 
-
 {% block content %}
-<div class="py3 px2 bg-white border-top center">
+<div class='py3 px2 bg-white border-top center'>
   {% if seller.icon_url %}
     <img class='circle' width='75' height='75' src='{{ seller.icon_url }}'>
   {% endif %}
@@ -15,17 +14,17 @@
     <a class='h5 black border-bottom' href='{{ site.full_url }}' target='_blank'>{{ site.display }}</a>
   {% endif %}
 </div>
-<div class="container px2 py4">
+<div class='container px2 py4'>
   {% if products|length %}
-    <div class="flex flex-wrap mxn2">
+    <div class='flex flex-wrap mxn2'>
       {% for p in products %}
-        <div class="col-6 sm-col-4 border-box px2">
-          {% include "web/_includes/product-card.html" with p=p %}
+        <div class='col-6 sm-col-4 border-box px2'>
+          {% include 'web/_includes/product-card.html' with p=p %}
         </div>
       {% endfor %}
     </div>
   {% else %}
-    <div class="p2 bg-darken-1 rounded">
+    <div class='p2 bg-darken-1 rounded'>
       😳 {{ seller.name }} doesn't have any products on Uncoverly
     </div>
   {% endif %}

@@ -7,24 +7,24 @@
 {% endblock %}
 
 {% block container %}
-<div class="mb1 clearfix mxn1">
-  <div class="sm-col">
-    <a href="{% url 'web:home' %}" class="btn p1 {{ category|yesno:"regular,bold" }}">Discover</a>
+<div class='mb1 clearfix mxn1'>
+  <div class='sm-col'>
+    <a href='{% url "web:home" %}' class='btn p1 {{ category|yesno:"regular,bold" }}'>Discover</a>
     <span>&middot;</span>
-    <a href="{% url 'web:categories' %}" class="btn p1 {{ category|yesno:"bold,regular" }}">Categories</a>
+    <a href='{% url "web:categories" %}' class='btn p1 {{ category|yesno:"bold,regular" }}'>Categories</a>
   </div>
 </div>
 
 {% if category %}
-<div class="p2 mb2 bg-darken-1 rounded center">
-  <h3 class="m0">{{ category.display }}</h3>
+<div class='p2 mb2 bg-darken-1 rounded center'>
+  <h3 class='m0'>{{ category.display }}</h3>
 </div>
 {% endif %}
 
-<div class="flex flex-wrap mxn2">
+<div class='flex flex-wrap mxn2'>
   {% for product in products %}
-  <div class="col-6 sm-col-4 border-box px2">
-    {% include "web/_includes/product-card.html" with p=product %}
+  <div class='col-6 sm-col-4 border-box px2'>
+    {% include 'web/_includes/product-card.html' with p=product %}
   </div>
   {% endfor %}
 </div>

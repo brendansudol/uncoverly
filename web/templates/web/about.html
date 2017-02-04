@@ -1,33 +1,30 @@
 {% extends 'web/base.html' %}
 {% block title %}About{% endblock %}
 
-
 {% block container %}
 <div class='sm-col-8 md-col-6 mx-auto'>
   <h2>The best products on Etsy. <br class='sm-show'>Uncovered for you.</h2>
   <p>We think that Etsy is the best place to buy unique & meaningful products, and Uncoverly is the best way to discover them. We show you great things and let Etsy take care of the rest.</p>
-
   <div class='clearfix mb3 bg-white'>
     {% for p in banner %}
       <div class='col col-3'>
-        <div class="img-cntnr ratio-34-27">
-          <a href="{% url 'web:product' p.pk %}">
-            <img class="block" src="{{ p.image_main }}">
+        <div class='img-cntnr ratio-34-27'>
+          <a href='{% url "web:product" p.pk %}'>
+            <img class='block' src='{{ p.image_main }}'>
           </a>
         </div>
       </div>
     {% endfor %}
   </div>
-
   <div class='clearfix mxn2 py3'>
     <div class='col-right col-8 sm-col-6 px2'>
       <h3 class='mt0 mb-tiny'>Curated with care.</h3>
       <p>Products are handpicked by a community that loves handmade.</p>
     </div>
     <div class='col col-4 sm-col-6 px2'>
-      <div class="img-cntnr ratio-34-27 bg-white">
-        <a href="{% url 'web:product' p1.pk %}">
-          <img class="block" src="{{ p1.image_main }}">
+      <div class='img-cntnr ratio-34-27 bg-white'>
+        <a href='{% url "web:product" p1.pk %}'>
+          <img class='block' src='{{ p1.image_main }}'>
         </a>
       </div>
     </div>
@@ -38,9 +35,9 @@
       <p>You can like products you think are cool, and show off your great taste to friends.</p>
     </div>
     <div class='col col-4 sm-col-6 px2'>
-      <div class="img-cntnr ratio-34-27 bg-white">
-        <a href="{% url 'web:product' p2.pk %}">
-          <img class="block" src="{{ p2.image_main }}">
+      <div class='img-cntnr ratio-34-27 bg-white'>
+        <a href='{% url "web:product" p2.pk %}'>
+          <img class='block' src='{{ p2.image_main }}'>
         </a>
       </div>
     </div>

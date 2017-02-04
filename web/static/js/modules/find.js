@@ -16,7 +16,7 @@ const show = msg => result.html(`<p class='bg-darken-1 p2 h6'>${msg}</p>`)
 
 const onSubmit = e => {
   e.preventDefault()
-  if (!isAuthed) { modal.modal('show'); return; }
+  if (!isAuthed) return modal.modal('show')
 
   const data = Object.assign(
     ...form.serializeArray().map(d => ({ [d.name]: d.value }))

@@ -1,23 +1,22 @@
 {% extends 'web/base.html' %}
 
-
 {% block container %}
-<!-- <h2>{{ now|date:"d M Y, H:i:s" }}</h2> -->
+<!-- <h2>{{ now|date:'d M Y, H:i:s' }}</h2> -->
 {% for cat, data in products.items %}
   {% if cat != 'misc' %}
-  <div class="mb4">
-    <a class="py2 px3 block bg-darken-1 black rounded-top h4 bold" href="{% url 'web:category' cat %}">
-      <i class="right icon ion-chevron-right"></i>
+  <div class='mb4'>
+    <a class='py2 px3 block bg-darken-1 black rounded-top h4 bold' href='{% url "web:category" cat %}'>
+      <i class='right icon ion-chevron-right'></i>
       <span>{{ data.display }}</span>
     </a>
-    <div class="clearfix">
+    <div class='clearfix'>
     {% for p in data.products %}
-      <div class="col col-4 sm-col-2">
-        <div class="bg-white">
+      <div class='col col-4 sm-col-2'>
+        <div class='bg-white'>
         {% if p.image_main %}
-        <div class="img-cntnr ratio-34-27">
-          <a href="{% url 'web:product' p.pk %}">
-            <img class="block" src="{{ p.image_main }}">
+        <div class='img-cntnr ratio-34-27'>
+          <a href='{% url "web:product" p.pk %}'>
+            <img class='block' src='{{ p.image_main }}'>
           </a>
         </div>
         {% endif %}

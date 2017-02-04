@@ -13,14 +13,14 @@ const fail = why => console.log(`fave fail: ${why || 'no reason given'}`)
 
 const onClick = e => {
   e.preventDefault()
-  if (!isAuthed) { modal.modal('show'); return; }
+  if (!isAuthed) return modal.modal('show')
 
   const a = $(e.currentTarget)
   $.post(`/favorite/${a.data('id')}`, csrf).done(handleResponse(a)).fail(fail)
 }
 
 const handleResponse = a => res => {
-  if (res.status !== 'success') { fail(res.reason); return; }
+  if (res.status !== 'success') return fail(res.reason)
 
   if (res.action === 'add') a.addClass(animate.cls)
   a.find('.heart-cntnr').toggleClass('faved')

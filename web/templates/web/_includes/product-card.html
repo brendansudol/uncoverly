@@ -1,23 +1,23 @@
-<div class="mb3 bg-white border rounded overflow-hidden">
+<div class='mb3 bg-white border rounded overflow-hidden'>
   {% if p.image_main %}
-  <div class="img-cntnr ratio-34-27">
-    <a href="{% url 'web:product' p.pk %}">
-      <img class="block" src="{{ p.image_main }}">
+  <div class='img-cntnr ratio-34-27'>
+    <a href='{% url "web:product" p.pk %}'>
+      <img class='block' src='{{ p.image_main }}'>
     </a>
   </div>
   {% endif %}
-  <div class="clearfix px1 py-tiny">
-    <div class="right">
-      <a href="#!" class="block my-tiny line-height-1 fave-action" data-id='{{ p.pk }}'>
+  <div class='clearfix px1 py-tiny'>
+    <div class='right'>
+      <a href='#!' class='block my-tiny line-height-1 fave-action' data-id='{{ p.pk }}'>
         <div class='heart-cntnr {% if p.pk in favorites %}faved{% endif %}'>
           <div class='heart'></div>
         </div>
       </a>
     </div>
     {% if p.price_usd %}
-    <span class="green">{{ p.price_display }}</span>
+    <span class='green'>{{ p.price_display }}</span>
     {% else %}
-    <span class="gray">N/A</span>
+    <span class='gray'>N/A</span>
     {% endif %}
   </div>
 </div>

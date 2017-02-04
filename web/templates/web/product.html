@@ -1,6 +1,5 @@
 {% extends 'web/base.html' %}
 
-
 {% block head %}
 <meta name='og:site_name' content='Uncoverly' />
 <meta name='og:url' content='{{ request.url }}' />
@@ -14,13 +13,12 @@
 <meta name='twitter:url' content='{{ request.url }}' />
 {% endblock %}
 
-
 {% block container %}
 {% if cat_id %}
 <div class='mxn1 h6'>
-  <a href='{% url 'web:home' %}' class='btn p1 regular'>Everything</a>
+  <a href='{% url "web:home" %}' class='btn p1 regular'>Everything</a>
   <span>›</span>
-  <a href='{% url 'web:category' cat_id %}' class='btn p1 regular'>{{ product.category }}</a>
+  <a href='{% url "web:category" cat_id %}' class='btn p1 regular'>{{ product.category }}</a>
 </div>
 {% endif %}
 
@@ -50,7 +48,7 @@
       </a>
     </div>
     <div class='mb2'>
-      <a target='_blank' href="https://twitter.com/intent/tweet?url={{ request.url|urlencode }}&text={{ 'I ❤️ this!'|urlencode }}&via=uncoverly" class='mr1 btn btn-outline px1 py-tiny border-gray border-box center'><img class='align-middle' src='/static/img/ico/twitter.svg' width='14' height='14'></a>
+      <a target='_blank' href='https://twitter.com/intent/tweet?url={{ request.url|urlencode }}&text={{ "I ❤️ this!"|urlencode }}&via=uncoverly' class='mr1 btn btn-outline px1 py-tiny border-gray border-box center'><img class='align-middle' src='/static/img/ico/twitter.svg' width='14' height='14'></a>
       <a target='_blank' href='http://www.facebook.com/sharer/sharer.php?u=http://www.uncoverly.com/p/186372207' class='btn btn-outline border-gray px1 py-tiny border-box center'><img class='align-middle' src='/static/img/ico/facebook.svg' width='14' height='14'></a>
     </div>
   </div>
@@ -66,7 +64,7 @@
       <div class='col col-6 sm-col-3 border-box'>
         <div class='bg-white'>
         {% if p.image_main %}
-          <a href='{% url 'web:product' p.pk %}'>
+          <a href='{% url "web:product" p.pk %}'>
             <img class='block' src='{{ p.image_main }}'>
           </a>
         {% endif %}
@@ -87,7 +85,7 @@
       <div class='col col-6 sm-col-3 border-box'>
         <div class='bg-white'>
         {% if p.image_main %}
-          <a href='{% url 'web:product' p.pk %}'>
+          <a href='{% url "web:product" p.pk %}'>
             <img class='block' src='{{ p.image_main }}'>
           </a>
         {% endif %}
@@ -97,9 +95,7 @@
     </div>
   </div>
 {% endif %}
-
 {% endblock %}
-
 
 {% block footerjs %}
 {{ block.super }}

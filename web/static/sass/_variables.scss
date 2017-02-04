@@ -16,12 +16,11 @@ $silver: #eee !default;
 $gray: #bbb !default;
 $black: #111 !default;
 
-// old one: #f9f3ef
 $body-background-color: #f5f5f5 !default;
 
 $font-serif: georgia, times, serif !default;
-$font-sans-serif: avenir next, avenir, helvetica, helvetica neue, ubuntu, roboto, noto, segoe ui, arial, sans-serif !default;
-$font-monospace: 'Source Code Pro', Consolas, monospace !default;
+$font-sans-serif: avenir next, avenir, helvetica, arial, sans-serif !default;
+$font-monospace: consolas, monospace !default;
 
 $base-font-size: 18px;
 $font-family: $font-sans-serif !default;
@@ -81,15 +80,6 @@ $table-cell-padding-y: .25rem !default;
 $table-border-color: $border-color !default;
 $table-bg-accent: #f9f9f9 !default;
 $table-bg-hover: #f5f5f5 !default;
-
-$width-1: 24rem !default;
-$width-2: 32rem !default;
-$width-3: 48rem !default;
-$width-4: 64rem !default;
-
-$viewport-small: 32rem;
-$viewport-medium: 48rem;
-$viewport-large: 64rem;
 
 $breakpoint-xs: '(max-width: 40rem)' !default;
 $breakpoint-sm: '(min-width: 40rem)' !default;

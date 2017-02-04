@@ -1,23 +1,24 @@
-<footer class="bg-white">
-  <div class="p2 container">
-    <div class="clearfix mxn2">
-      <div class="col col-12 sm-col-7 px2 py2">
-        <div class="mb1 bold">Discover the best of Etsy.</div>
-        <div class="mb1 mxn1">
-          <a href="{% url 'web:about' %}" class="btn px1 py0 h5 regular">About</a>
-          <a href="{% url 'web:contact' %}" class="btn px1 py0 h5 regular xs-hide">Contact</a>
-          <a href="{% url 'web:find' %}" class="btn px1 py0 h5 regular">Add products</a>
-          <a href="{% url 'web:terms' %}" class="btn px1 py0 h5 regular">Terms</a>
-          <a href="{% url 'web:privacy' %}" class="btn px1 py0 h5 regular">Privacy</a>
+<footer class='bg-white'>
+  <div class='p2 container'>
+    <div class='clearfix mxn2'>
+      <div class='col col-12 sm-col-7 px2 py2'>
+        <div class='mb1 bold'>Discover the best of Etsy.</div>
+        <div class='mb1 mxn1'>
+          <a href='{% url "web:about" %}' class='btn px1 py0 h5 regular'>About</a>
+          <a href='{% url "web:contact" %}' class='btn px1 py0 h5 regular xs-hide'>Contact</a>
+          <a href='{% url "web:find" %}' class='btn px1 py0 h5 regular'>Add products</a>
+          <a href='{% url "web:terms" %}' class='btn px1 py0 h5 regular'>Terms</a>
+          <a href='{% url "web:privacy" %}' class='btn px1 py0 h5 regular'>Privacy</a>
         </div>
-        <div class="pt-tiny h6">&copy; 2017 Uncoverly</div>
+        <div class='pt-tiny h6'>&copy; 2017 Uncoverly</div>
       </div>
-      <div class="col col-12 sm-col-5 px2 py2 sm-show border-left border-silver bw4">
-        <div class="mb2">Get hand-picked, beautiful products delivered to your inbox every week.</div>
-        <form class="clearfix" id="newsletter">
-          <label class="hide">Email</label>
-          <input type="email" class="col col-8 field rounded-left x-group-item" placeholder="Email address" required>
-          <button type="submit" class="col col-4 btn btn-primary rounded-right">Subscribe</button>
+      <div class='col col-12 sm-col-5 px2 py2 sm-show border-left border-silver bw4'>
+        <div class='mb2'>Get hand-picked, beautiful products delivered to your inbox every week.</div>
+        <form class='clearfix js-newsletter-form' action='/newsletter' method='post'>
+          {% csrf_token %}
+          <label class='hide'>Email</label>
+          <input type='email' name='email' class='col col-8 field rounded-left x-group-item' placeholder='Email address' required>
+          <button type='submit' class='col col-4 btn btn-primary rounded-right'>Subscribe</button>
         </form>
       </div>
     </div>
