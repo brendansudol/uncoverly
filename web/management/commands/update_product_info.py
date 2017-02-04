@@ -1,7 +1,9 @@
 import json
 import logging
 
+from datetime import datetime, timedelta
 from time import sleep
+
 from django.core.management import BaseCommand
 
 from core.etsy import Etsy
@@ -12,25 +14,40 @@ logger = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):
+    now = datetime.now()
+    limit = 2000
+
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--inactive',
+            dest='inactive',
+            action='store_true',
+            default=False,
+            help='Update inactive products'
+        )
+
     def handle(self, *args, **options):
         etsy = Etsy()
 
         products = Product.objects \
-            .order_by('updated')
+            .is_active(not options['inactive']) \
+            .filter(last_synced__lt=self.now - timedelta(days=2)) \
+            .order_by('last_synced')
 
         logger.info('total products: {}'.format(len(products)))
 
-        for i, p in enumerate(products[:5]):
+        for i, p in enumerate(products[:self.limit]):
             data = etsy.get_listing_details(p.id)
 
             if not data:
                 continue
 
-            data_cleaned = self.clean_data(data)
-            logger.info('data: {}\n'.format(data_cleaned))
+            clean = self.clean_data(data)
+            logger.info('data: {}\n'.format(clean))
 
-            for k, v in data_cleaned.items():
-                setattr(p, k, v)
+            for k, v in clean.items():
+                if v is not None:
+                    setattr(p, k, v)
             p.save()
 
             if i % 5 == 0:
@@ -43,7 +60,7 @@ class Command(BaseCommand):
 
         entry = {
             'title': d.get('title'),
-            'state': d.get('state'),
+            'state': d.get('state') or 'NA',
             'price': d.get('price'),
             'currency': d.get('currency_code'),
             'category': cats[0] if len(cats) > 0 else None,
@@ -52,6 +69,7 @@ class Command(BaseCommand):
             'views': d.get('views', 0),
             'favorers': d.get('num_favorers', 0),
             'image_main': img.replace('170x135', '340x270'),
+            'last_synced': cls.now,
         }
 
         return entry

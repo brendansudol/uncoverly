@@ -44,6 +44,14 @@ class ProductManager(models.Manager):
         qs = self.get_queryset()
         return qs.filter(reduce(or_, q_objs))
 
+    def is_active(self, val=True):
+        qs = self.get_queryset()
+
+        if not val:
+            return qs.exclude(state='active')
+
+        return qs.filter(state='active')
+
 
 class Product(ModelBase):
     def rand_default():
