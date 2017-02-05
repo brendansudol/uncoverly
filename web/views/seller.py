@@ -12,6 +12,7 @@ class SellerView(DetailView):
         context = super(SellerView, self).get_context_data(**kwargs)
 
         context['products'] = Product.objects \
+            .filter(is_awesome=True) \
             .filter(seller__pk=self.kwargs['pk']) \
             .order_by('-created')
 

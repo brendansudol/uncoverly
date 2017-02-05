@@ -1,6 +1,8 @@
 import json
 import logging
 
+from datetime import datetime
+
 from django.core.management import BaseCommand
 from social_django.models import UserSocialAuth
 
@@ -52,6 +54,9 @@ class Command(BaseCommand):
         for i, d in enumerate(users):
             fname, lname = d['first_name'] or '', d['last_name'] or ''
             uname = d['username'] or d['email'] or '{}{}'.format(fname, lname)
+
+            if not uname:
+                continue
 
             user = UserSocialAuth.create_user(
                 username=uname[:30],
@@ -111,6 +116,7 @@ class Command(BaseCommand):
                 tags=d['tags'],
                 image_main=d['img'],
                 is_awesome=True,
+                last_synced=datetime.fromtimestamp(int(d['last_update'])),
                 seller=seller,
             )
 

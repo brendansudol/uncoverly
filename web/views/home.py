@@ -25,4 +25,4 @@ class HomeView(ListView):
             except Exception:
                 pass
 
-        return qs
+        return qs.filter(is_visible=True).order_by('rand1')

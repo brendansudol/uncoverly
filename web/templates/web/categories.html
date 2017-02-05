@@ -1,7 +1,7 @@
 {% extends 'web/base.html' %}
 
 {% block container %}
-<!-- <h2>{{ now|date:'d M Y, H:i:s' }}</h2> -->
+<div class='py3'>
 {% for cat, data in products.items %}
   {% if cat != 'misc' %}
   <div class='mb4'>
@@ -27,4 +27,5 @@
   </div>
   {% endif %}
 {% endfor %}
+</div>
 {% endblock %}

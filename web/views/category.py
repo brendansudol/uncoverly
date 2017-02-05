@@ -34,7 +34,9 @@ class CategoriesView(TemplateView):
 
     def product_sample(self, category):
         return Product.objects \
+            .filter(is_visible=True) \
             .filter(category=category) \
+            .order_by('rand2') \
             .all()[:self.products_per_category]
 
 
@@ -52,8 +54,12 @@ class CategoryView(ListView):
         return super(CategoryView, self).dispatch(*args, **kwargs)
 
     def get_queryset(self):
-        qs = super(CategoryView, self).get_queryset()
-        return qs.filter(category=CATEGORIES[self.category])
+        qs = super(CategoryView, self).get_queryset() \
+            .filter(is_visible=True) \
+            .filter(category=CATEGORIES[self.category]) \
+            .order_by('rand2')
+
+        return qs
 
     def get_context_data(self, **kwargs):
         context = super(CategoryView, self).get_context_data(**kwargs)
