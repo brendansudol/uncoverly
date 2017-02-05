@@ -5,4 +5,4 @@ from web.models import Product
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        Product.update_visibility()
+        Product.randomize()
