@@ -11,7 +11,15 @@ logger = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '-l', '--limit',
+            dest='limit',
+            default=2000,
+        ),
+
     def handle(self, *args, **options):
+        limit = int(options['limit'])
         etsy = Etsy()
 
         sellers = Seller.objects \
@@ -20,7 +28,7 @@ class Command(BaseCommand):
 
         logger.info('total shops: {}'.format(len(sellers)))
 
-        for i, s in enumerate(sellers[:200]):
+        for i, s in enumerate(sellers[:limit]):
             logger.info('{}...\n'.format(s.id))
             data = etsy.get_shop_info_all(s.id)
 
