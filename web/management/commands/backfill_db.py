@@ -30,8 +30,12 @@ class Command(BaseCommand):
             help='Limit the number of products to backfill'
         ),
 
+    def fetch(self, path):
+        response = self.s3.get(path, 'uncoverly')
+        return json.loads(response.content.decode('utf-8'))
+
     def handle(self, *args, **options):
-        s3 = client()
+        self.s3 = client()
 
         if not options['go']:
             logger.info('to run, add "--go" flag (be careful!)')
@@ -48,8 +52,7 @@ class Command(BaseCommand):
 
         # users
 
-        response = s3.get('export/users.json', 'uncoverly')
-        users = json.loads(response.content)
+        users = self.fetch('export/users.json')
 
         for i, d in enumerate(users):
             fname, lname = d['first_name'] or '', d['last_name'] or ''
@@ -91,8 +94,7 @@ class Command(BaseCommand):
 
         # products
 
-        response = s3.get('export/products.json', 'uncoverly')
-        data = json.loads(response.content)
+        data = self.fetch('export/products.json')
         lim = int(options['limit'])
 
         for i, d in enumerate(data[:lim]):
@@ -132,8 +134,7 @@ class Command(BaseCommand):
 
         # favorites
 
-        response = s3.get('export/favorites.json', 'uncoverly')
-        faves = json.loads(response.content)
+        faves = self.fetch('export/favorites.json')
         faves_clean = list(set([(f['pid'], f['uid']) for f in faves]))
         skipped = set()
 
@@ -155,8 +156,7 @@ class Command(BaseCommand):
 
         # finds
 
-        response = s3.get('export/finds.json', 'uncoverly')
-        finds = json.loads(response.content)
+        finds = self.fetch('export/finds.json')
         finds_clean = list(set([(f['pid'], f['uid']) for f in finds]))
         skipped.clear()
 
