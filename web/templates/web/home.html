@@ -1,11 +1,5 @@
 {% extends 'web/base.html' %}
 
-{% block callout %}
-{% if not request.COOKIES.hide_banner %}
-  {% include 'web/_includes/welcome.html' %}
-{% endif %}
-{% endblock %}
-
 {% block container %}
 <div class='mb1 clearfix mxn1'>
   <div class='sm-col'>
