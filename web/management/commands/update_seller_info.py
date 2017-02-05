@@ -30,7 +30,7 @@ class Command(BaseCommand):
 
         for i, s in enumerate(sellers[:limit]):
             logger.info('{}...\n'.format(s.id))
-            data = etsy.get_shop_info_all(s.id)
+            data = etsy.get_shop_info(s.id)
 
             if not data:
                 continue
