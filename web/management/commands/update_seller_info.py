@@ -50,8 +50,9 @@ class Command(BaseCommand):
             story = d['more']['story']
             links = d['more'].get('related_links', {})
             social = {
-                l['title']: l['url']
-                for l in (links.values() if type(links) == dict else links)
+                l['title']: l['url'] for l in (
+                    links.values() if type(links) == dict else (links or [])
+                )
             }
 
         entry = {
