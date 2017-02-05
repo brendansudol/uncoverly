@@ -26,11 +26,26 @@ class Command(BaseCommand):
             help='Update inactive products'
         )
 
+        parser.add_argument(
+            '--mode',
+            dest='mode',
+            default='adhoc',
+        )
+
     def handle(self, *args, **options):
+        mode = options['mode']
+        is_active = not options['inactive']
         etsy = Etsy()
 
+        if mode == 'hourly':
+            hour = self.now.hour
+            is_active = False if hour == 0 else is_active
+            if hour % 4 != 0:
+                logger.info('skipping run (hour is {})'.format(hour))
+                return
+
         products = Product.objects \
-            .is_active(not options['inactive']) \
+            .is_active(is_active) \
             .filter(last_synced__lt=self.now - timedelta(days=2)) \
             .order_by('last_synced')
 
@@ -52,6 +67,8 @@ class Command(BaseCommand):
 
             if i % 5 == 0:
                 sleep(1)
+
+        Product.update_visibility()
 
     @classmethod
     def clean_data(cls, d):
