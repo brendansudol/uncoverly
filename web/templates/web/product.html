@@ -2,7 +2,7 @@
 
 {% block head %}
 <meta name='og:site_name' content='Uncoverly' />
-<meta name='og:url' content='{{ request.url }}' />
+<meta name='og:url' content='{{ request.build_absolute_uri }}' />
 <meta name='og:image' content='{{ product.image_lg }}' />
 <meta name='og:description' content='{{ product.title }}' />
 <meta name='twitter:card' content='photo' />
@@ -10,7 +10,7 @@
 <meta name='twitter:creator' content='@uncoverly' />
 <meta name='twitter:title' content='{{ product.title }}' />
 <meta name='twitter:image' content='{{ product.image_main }}' />
-<meta name='twitter:url' content='{{ request.url }}' />
+<meta name='twitter:url' content='{{ request.build_absolute_uri }}' />
 {% endblock %}
 
 {% block container %}
@@ -28,13 +28,13 @@
   </div>
   <div class='col col-12 sm-col-5 p3'>
     <div class='h4 mb2'>
-      {{ product.title|lower }}
+      {{ product.title|lower|safe }}
     </div>
     <div class='mb2'>
     {% if product.price_usd %}
-      <a class='btn btn-primary' href='#!'>{{ product.price_display }} ➞</a>
+      <a class='btn btn-primary' target='_blank' href='https://www.etsy.com/listing/{{ product.pk }}'>{{ product.price_display }} ➞</a>
     {% else %}
-      <a class='btn btn-primary bg-gray' href='#!'>N/A ➞</a>
+      <a class='btn btn-primary bg-gray' target='_blank' href='https://www.etsy.com/listing/{{ product.pk }}'>N/A ➞</a>
     {% endif %}
     </div>
     <div class='mb2'>
@@ -48,8 +48,8 @@
       </a>
     </div>
     <div class='mb2'>
-      <a target='_blank' href='https://twitter.com/intent/tweet?url={{ request.url|urlencode }}&text={{ "I ❤️ this!"|urlencode }}&via=uncoverly' class='mr1 btn btn-outline px1 py-tiny border-gray border-box center'><img class='align-middle' src='/static/img/ico/twitter.svg' width='14' height='14'></a>
-      <a target='_blank' href='http://www.facebook.com/sharer/sharer.php?u=http://www.uncoverly.com/p/186372207' class='btn btn-outline border-gray px1 py-tiny border-box center'><img class='align-middle' src='/static/img/ico/facebook.svg' width='14' height='14'></a>
+      <a target='_blank' href='https://twitter.com/intent/tweet?url={{ request.build_absolute_uri|urlencode }}&text={{ "I ❤️ this!"|urlencode }}&via=uncoverly' class='mr1 btn btn-outline px1 py-tiny border-gray border-box center'><img class='align-middle' src='/static/img/ico/twitter.svg' width='14' height='14'></a>
+      <a target='_blank' href='http://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}' class='btn btn-outline border-gray px1 py-tiny border-box center'><img class='align-middle' src='/static/img/ico/facebook.svg' width='14' height='14'></a>
     </div>
   </div>
 </div>
@@ -57,7 +57,7 @@
 {% if more_seller|length > 3 %}
   <div class='mb3 p3 bg-darken-1'>
     <div class='mb2 center'>
-      More from <strong>{{ product.seller.name }}</strong>
+      More from <a class='bold black' href='{% url "web:seller" product.seller.pk %}'>{{ product.seller.name }}</a>
     </div>
     <div class='clearfix'>
     {% for p in more_seller %}
@@ -78,7 +78,11 @@
 {% if more_category|length %}
   <div class='mb3 p3 bg-darken-1'>
     <div class='mb2 center'>
-      More from <strong>{{ product.category }}</strong>
+      {% if cat_id %}
+        More from <a class='bold black' href='{% url "web:category" cat_id %}'>{{ product.category }}</a>
+      {% else %}
+        More from <strong>{{ product.category }}</strong>
+      {% endif %}
     </div>
     <div class='clearfix'>
     {% for p in more_category %}
