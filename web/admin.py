@@ -23,6 +23,8 @@ class ProductAdmin(admin.ModelAdmin):
     def set_awesome(value):  # NOQA
         def fn(self, request, qs):
             qs.update(is_awesome=value)
+            if not value:
+                qs.update(is_visible=value)
         fn.short_description = 'Set is_awesome to {}'.format(value)
         return fn
 
