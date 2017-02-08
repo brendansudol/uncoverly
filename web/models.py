@@ -31,6 +31,15 @@ class Seller(ModelBase):
     def __str__(self):
         return self.id
 
+    @property
+    def tw_handle(self):
+        tw = (self.social or {}).get('twitter')
+
+        if not tw:
+            return
+
+        return '@{}'.format(tw.split('/')[-1])
+
 
 class ProductManager(models.Manager):
     def search(self, terms):
@@ -74,6 +83,7 @@ class Product(ModelBase):
     image_main = models.URLField(null=True, blank=True)
     is_awesome = models.NullBooleanField()
     is_visible = models.BooleanField(default=False)
+    tw_featured = models.BooleanField(default=False)
     last_synced = models.DateTimeField(default=datetime.now, blank=True)
     rand1 = models.PositiveIntegerField(default=rand_default)
     rand2 = models.PositiveIntegerField(default=rand_default)
