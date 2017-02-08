@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 # from django.views.decorators.cache import cache_page
 
 from web.views.about import AboutView
@@ -16,8 +16,7 @@ from web.views.product import ProductView
 from web.views.seller import SellerView
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^$', HomeView.as_view(), name='home'),
     url(r'^about$', AboutView.as_view(), name='about'),
     url(r'^contact$', ContactView.as_view(), name='contact'),
@@ -49,4 +48,4 @@ urlpatterns = patterns(
     url(r'^login$', LoginView.as_view(), name='login'),
     url(r'^logout$', LogoutView.as_view(), name='logout'),
     url(r'^join$', SignupView.as_view(), name='signup'),
-)
+]
