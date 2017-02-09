@@ -85,7 +85,6 @@ class Product(ModelBase):
 
     taxonomy_old = ArrayField(models.CharField(max_length=100), null=True, blank=True)
     taxonomy = ArrayField(models.CharField(max_length=100), null=True, blank=True)
-    category = models.CharField(max_length=512, null=True, blank=True)
 
     views = models.PositiveIntegerField(null=True, blank=True)
     favorers = models.PositiveIntegerField(null=True, blank=True)
@@ -105,6 +104,11 @@ class Product(ModelBase):
 
     def __str__(self):
         return self.id
+
+    @property
+    def category(self):
+        tax = self.taxonomy
+        return tax[0] if tax else None
 
     @property
     def image_lg(self):

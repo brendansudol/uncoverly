@@ -4,40 +4,41 @@ from django.shortcuts import redirect
 from django.views.generic import ListView, TemplateView
 
 from web.models import Product
-from web.util.categories import CATEGORIES
+from web.util.categories import CATEGORIES, CAT_NAME_LOOKUP
 
 
 class CategoriesView(TemplateView):
     template_name = 'web/categories.html'
-    products_per_category = 6
+    product_limit = 6
 
     def get_context_data(self, **kwargs):
         context = super(CategoriesView, self).get_context_data(**kwargs)
 
         context.update({
             'now': datetime.now(),
-            'products': self.products_by_category(),
+            'categories': self.products_by_category(),
         })
 
         return context
 
     def products_by_category(self):
-        data = {}
+        data = []
 
-        for key, category in CATEGORIES.items():
-            data[key] = {
-                'display': category,
-                'products': self.product_sample(category),
-            }
+        for c in CATEGORIES:
+            data.append({
+                'id': c['id'],
+                'display': c['name'],
+                'products': self.product_sample(c['name']),
+            })
 
         return data
 
-    def product_sample(self, category):
+    def product_sample(self, cat):
         return Product.objects \
             .filter(is_visible=True) \
-            .filter(category=category) \
+            .filter(taxonomy__0=cat) \
             .order_by('rand2') \
-            .all()[:self.products_per_category]
+            .all()[:self.product_limit]
 
 
 class CategoryView(ListView):
@@ -48,15 +49,18 @@ class CategoryView(ListView):
     template_name = 'web/home.html'
 
     def dispatch(self, *args, **kwargs):
-        self.category = self.kwargs['cat']
-        if self.category not in CATEGORIES:
+        self.cat_id = self.kwargs['cat']
+        self.cat_name = CAT_NAME_LOOKUP.get(self.cat_id)
+
+        if self.cat_id not in CAT_NAME_LOOKUP:
             return redirect('web:home')
+
         return super(CategoryView, self).dispatch(*args, **kwargs)
 
     def get_queryset(self):
         qs = super(CategoryView, self).get_queryset() \
             .filter(is_visible=True) \
-            .filter(category=CATEGORIES[self.category]) \
+            .filter(taxonomy__0=self.cat_name) \
             .order_by('rand2')
 
         return qs
@@ -66,8 +70,8 @@ class CategoryView(ListView):
 
         context.update({
             'category': {
-                'id': self.category,
-                'display': CATEGORIES[self.category],
+                'id': self.cat_id,
+                'display': self.cat_name,
             },
         })
 

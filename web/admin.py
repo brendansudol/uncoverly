@@ -7,7 +7,7 @@ from web.models import Product, Seller
 @admin.register(Product, site=admin.site)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('id', 'state', 'category', 'preview')
-    list_filter = ('state', 'is_awesome', 'is_visible', 'category')
+    list_filter = ('state', 'is_awesome', 'is_visible')
     actions = ('mark_awesome', 'mark_not_awesome')
     ordering = ('rand1',)
 

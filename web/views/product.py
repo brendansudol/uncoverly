@@ -1,7 +1,7 @@
 from django.views.generic.detail import DetailView
 
 from web.models import Product
-from web.util.categories import CATEGORY_TO_ID
+from web.util.categories import CAT_ID_LOOKUP
 
 
 class ProductView(DetailView):
@@ -15,7 +15,7 @@ class ProductView(DetailView):
         context.update({
             'more_category': self.more_by_category(),
             'more_seller': self.more_by_seller(),
-            'cat_id': CATEGORY_TO_ID.get(self.object.category),
+            'cat_id': CAT_ID_LOOKUP.get(self.object.category),
         })
 
         return context
@@ -27,7 +27,8 @@ class ProductView(DetailView):
             return []
 
         return Product.objects \
-            .filter(category=category) \
+            .filter(is_visible=True) \
+            .filter(taxonomy__0=category) \
             .exclude(pk=self.object.pk) \
             .all()[:8]
 
@@ -38,6 +39,7 @@ class ProductView(DetailView):
             return []
 
         return Product.objects \
+            .filter(is_visible=True) \
             .filter(seller=seller) \
             .exclude(pk=self.object.pk) \
             .all()[:4]
