@@ -5,6 +5,7 @@ from operator import or_
 from random import randrange, shuffle
 
 from django.contrib.auth.models import User
+from django.contrib.postgres.fields import ArrayField
 from django.db import models, transaction
 from django.db.models import Q
 from jsonfield import JSONField
@@ -70,21 +71,33 @@ class Product(ModelBase):
     seller = models.ForeignKey(
         Seller, related_name='products', null=True, blank=True
     )
+
     title = models.CharField(max_length=1024, null=True, blank=True)
     state = models.CharField(max_length=64, null=True, blank=True)
+
     price = models.CharField(max_length=32, null=True, blank=True)
     currency = models.CharField(max_length=32, null=True, blank=True)
     price_usd = models.PositiveIntegerField(null=True, blank=True)
+
+    tags = ArrayField(models.CharField(max_length=100), null=True, blank=True)
+    materials = ArrayField(models.CharField(max_length=100), null=True, blank=True)
+    style = ArrayField(models.CharField(max_length=100), null=True, blank=True)
+
+    taxonomy_old = ArrayField(models.CharField(max_length=100), null=True, blank=True)
+    taxonomy = ArrayField(models.CharField(max_length=100), null=True, blank=True)
     category = models.CharField(max_length=512, null=True, blank=True)
-    tags = models.CharField(max_length=512, null=True, blank=True)
-    materials = models.CharField(max_length=512, null=True, blank=True)
+
     views = models.PositiveIntegerField(null=True, blank=True)
     favorers = models.PositiveIntegerField(null=True, blank=True)
+
     image_main = models.URLField(null=True, blank=True)
+
+    last_synced = models.DateTimeField(default=datetime.now, blank=True)
+
     is_awesome = models.NullBooleanField()
     is_visible = models.BooleanField(default=False)
     tw_featured = models.BooleanField(default=False)
-    last_synced = models.DateTimeField(default=datetime.now, blank=True)
+
     rand1 = models.PositiveIntegerField(default=rand_default)
     rand2 = models.PositiveIntegerField(default=rand_default)
 
