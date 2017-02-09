@@ -1,10 +1,10 @@
-import json
 import logging
 
-from datetime import datetime, timedelta
+from datetime import timedelta
 from time import sleep
 
 from django.core.management import BaseCommand
+from django.utils import timezone
 
 from core.etsy import Etsy
 from web.models import Product
@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):
-    now = datetime.now()
+    now = timezone.now()
     limit = 2000
 
     def add_arguments(self, parser):
@@ -61,7 +61,7 @@ class Command(BaseCommand):
             logger.info('data: {}\n'.format(clean))
 
             for k, v in clean.items():
-                if v is not None:
+                if v is not None and v != '':
                     setattr(p, k, v)
             p.save()
 
@@ -72,7 +72,7 @@ class Command(BaseCommand):
 
     @classmethod
     def clean_data(cls, d):
-        cats = d.get('category_path', [])
+        cats = d.get('category_path')
         img = d.get('MainImage', {}).get('url_170x135', '')
 
         entry = {
@@ -80,9 +80,12 @@ class Command(BaseCommand):
             'state': d.get('state') or 'NA',
             'price': d.get('price'),
             'currency': d.get('currency_code'),
-            'category': cats[0] if len(cats) > 0 else None,
-            'tags': json.dumps(d.get('tags')),
-            'materials': json.dumps(d.get('materials')),
+            'tags': d.get('tags'),
+            'materials': d.get('materials'),
+            'style': d.get('style'),
+            'taxonomy_old': cats,
+            'taxonomy': d.get('taxonomy_path'),
+            'category': cats[0] if cats and len(cats) > 0 else None,
             'views': d.get('views', 0),
             'favorers': d.get('num_favorers', 0),
             'image_main': img.replace('170x135', '340x270'),
