@@ -1,4 +1,5 @@
 {% extends 'web/base.html' %}
+{% load extras %}
 
 {% block head %}
 <meta name='og:site_name' content='Uncoverly' />
@@ -27,17 +28,17 @@
     <img class='col-12' src='{{ product.image_lg }}'>
   </div>
   <div class='col col-12 sm-col-5 p3'>
-    <div class='h4 mb2'>
+    <div class='h4 mb3'>
       {{ product.title|lower|safe }}
     </div>
-    <div class='mb2'>
+    <div class='mb1'>
     {% if product.price_usd %}
       <a class='btn btn-primary' target='_blank' href='https://www.etsy.com/listing/{{ product.pk }}'>{{ product.price_display }} ➞</a>
     {% else %}
       <a class='btn btn-primary bg-gray' target='_blank' href='https://www.etsy.com/listing/{{ product.pk }}'>N/A ➞</a>
     {% endif %}
     </div>
-    <div class='mb2'>
+    <div class='mb1'>
       <a class='btn btn-outline border-gray h5 regular fave-action' href='#!' data-id='{{ product.pk }}'>
         <div class='line-height-1'>
           <div class='inline-block align-bottom heart-cntnr {% if product.pk in favorites %}faved{% endif %}'>
@@ -47,10 +48,17 @@
         </div>
       </a>
     </div>
-    <div class='mb2'>
+    <div class='mb3'>
       <a target='_blank' href='https://twitter.com/intent/tweet?url={{ request.build_absolute_uri|urlencode }}&text={{ "I ❤️ this!"|urlencode }}&via=uncoverly' class='mr1 btn btn-outline px1 py-tiny border-gray border-box center'><img class='align-middle' src='/static/img/ico/twitter.svg' width='14' height='14'></a>
       <a target='_blank' href='http://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}' class='btn btn-outline border-gray px1 py-tiny border-box center'><img class='align-middle' src='/static/img/ico/facebook.svg' width='14' height='14'></a>
     </div>
+    {% if product.keywords %}
+      <div>
+        {% for item in product.keywords %}
+          <a href='/search?q={{ item|urlencode|prettify }}' class='btn btn-primary p-tiny mb1 mr1 h6 regular black bg-darken-1'>{{ item|lower|safe }}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
   </div>
 </div>
 

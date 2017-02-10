@@ -17,3 +17,8 @@ def make_url(url, page, query=None):
 @register.filter
 def get(d, k):
     return d.get(k)
+
+
+@register.filter
+def prettify(val):
+    return val.replace('%20', '+')

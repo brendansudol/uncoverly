@@ -1,5 +1,4 @@
 from django.conf.urls import url
-# from django.views.decorators.cache import cache_page
 
 from web.views.about import AboutView
 from web.views.auth import LoginView, LogoutView, SignupView
@@ -8,44 +7,39 @@ from web.views.favorite import FavoriteView, FavoritesView
 from web.views.featured import FeaturedSellerView
 from web.views.find import FindView, FindsView
 from web.views.home import HomeView
-from web.views.misc import (
-    ContactView, PrivacyView, TermsView
-)
+from web.views.misc import ContactView, PrivacyView, TermsView
 from web.views.newsletter import NewsletterView
 from web.views.product import ProductView
+from web.views.search import SearchView
 from web.views.seller import SellerView
 
 
 urlpatterns = [
     url(r'^$', HomeView.as_view(), name='home'),
     url(r'^about$', AboutView.as_view(), name='about'),
-    url(r'^contact$', ContactView.as_view(), name='contact'),
-    url(r'^privacy$', PrivacyView.as_view(), name='privacy'),
-    url(r'^terms$', TermsView.as_view(), name='terms'),
-    url(r'^newsletter$', NewsletterView.as_view(), name='newsletter'),
-    url(
-        r'^categories$',
-        # cache_page(60 * 5)(CategoriesView.as_view()),
-        CategoriesView.as_view(),
-        name='categories'
-    ),
     url(r'^c/(?P<cat>[\w/\-]+)?$', CategoryView.as_view(), name='category'),
-    url(r'^s/(?P<pk>[\w/\-]+)?$', SellerView.as_view(), name='seller'),
-    url(r'^p/(?P<pk>[\w/\-]+)?$', ProductView.as_view(), name='product'),
+    url(r'^categories$', CategoriesView.as_view(), name='categories'),
+    url(r'^contact$', ContactView.as_view(), name='contact'),
     url(r'^favorite/(?P<pid>[\w/\-]+)?$', FavoriteView.as_view(), name='fave'),
+    url(r'^featured$', FeaturedSellerView.as_view(), name='featured'),
+    url(r'^find$', FindView.as_view(), name='find'),
+    url(r'^join$', SignupView.as_view(), name='signup'),
+    url(r'^login$', LoginView.as_view(), name='login'),
+    url(r'^logout$', LogoutView.as_view(), name='logout'),
+    url(r'^newsletter$', NewsletterView.as_view(), name='newsletter'),
+    url(r'^p/(?P<pk>[\w/\-]+)?$', ProductView.as_view(), name='product'),
+    url(r'^privacy$', PrivacyView.as_view(), name='privacy'),
+    url(r'^s/(?P<pk>[\w/\-]+)?$', SellerView.as_view(), name='seller'),
+    url(r'^search$', SearchView.as_view(), name='search'),
+    url(r'^terms$', TermsView.as_view(), name='terms'),
     url(
         r'^u/(?P<uid>[\w/\-]+)/favorites$',
         FavoritesView.as_view(),
         name='faves'
     ),
-    url(r'^find$', FindView.as_view(), name='find'),
     url(
         r'^u/(?P<uid>[\w/\-]+)/finds$',
         FindsView.as_view(),
         name='finds'
     ),
-    url(r'^featured$', FeaturedSellerView.as_view(), name='featured'),
-    url(r'^login$', LoginView.as_view(), name='login'),
-    url(r'^logout$', LogoutView.as_view(), name='logout'),
-    url(r'^join$', SignupView.as_view(), name='signup'),
 ]

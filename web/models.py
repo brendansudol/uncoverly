@@ -1,4 +1,4 @@
-from collections import defaultdict
+from collections import defaultdict, OrderedDict
 from datetime import datetime
 from functools import reduce
 from operator import or_
@@ -43,13 +43,13 @@ class Seller(ModelBase):
 
 
 class ProductManager(models.Manager):
-    def search(self, terms):
-        terms = [term.strip() for term in terms.split()]
-
-        q_objs = []
-        for term in terms:
-            q_objs.append(Q(title__icontains=term))
-            q_objs.append(Q(tags__icontains=term))
+    def search(self, q):
+        q_objs = [
+            Q(title__icontains=q),
+            Q(taxonomy__contains=[q]),
+            Q(style__contains=[q]),
+            Q(materials__contains=[q]),
+        ]
 
         qs = self.get_queryset()
         return qs.filter(reduce(or_, q_objs))
@@ -109,6 +109,12 @@ class Product(ModelBase):
     def category(self):
         tax = self.taxonomy
         return tax[0] if tax else None
+
+    @property
+    def keywords(self):
+        data = [self.taxonomy, self.style, self.materials]
+        words = [i for d in data if d is not None for i in d]
+        return list(OrderedDict.fromkeys(words))
 
     @property
     def image_lg(self):

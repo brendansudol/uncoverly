@@ -1,7 +1,7 @@
 {% extends 'web/base.html' %}
 
 {% block container %}
-<div class='mb1 clearfix mxn1'>
+<div class='my1 clearfix mxn1'>
   <div class='sm-col'>
     <a href='{% url "web:home" %}' class='btn p1 {{ category|yesno:"regular,bold" }}'>Discover</a>
     <span>&middot;</span>
@@ -10,7 +10,7 @@
 </div>
 
 {% if category %}
-<div class='p2 mb2 bg-darken-1 rounded center'>
+<div class='mb3 p2 bg-darken-1 rounded center'>
   <h3 class='m0'>{{ category.display }}</h3>
 </div>
 {% endif %}
