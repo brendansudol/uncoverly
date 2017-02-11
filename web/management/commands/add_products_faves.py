@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):
-    MAX_PAGE = 2
+    MAX_PAGE = 3
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -21,8 +21,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         name = options['username']
-        etsy = Etsy()
         faves, page, skips = [], 1, 0
+        etsy = Etsy()
 
         while page is not None and page <= self.MAX_PAGE:
             data = etsy.get_user_faves(name, page)
@@ -39,6 +39,8 @@ class Command(BaseCommand):
                 skips += 1
                 continue
 
-            Product.objects.create(id=pid)
+            data = etsy.get_listing(pid)
+            clean = etsy.parse_listing(data)
+            Product.objects.create(id=pid, image_main=clean['image_main'])
 
         logger.info('added: {}; skipped: {}'.format(len(faves) - skips, skips))

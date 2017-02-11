@@ -2,6 +2,7 @@ import logging
 import requests
 
 from django.conf import settings
+from django.utils import timezone
 from urllib import parse
 
 
@@ -43,13 +44,13 @@ class Etsy(object):
             {'limit': 10, 'page': page},
         )
 
-    def get_listing_details(self, listing_id):
+    def get_listing(self, listing_id):
         return self.get(
             'listings/{}'.format(listing_id),
             {'includes': 'MainImage,Shop'},
         )
 
-    def get_shop_info(self, shop_id):
+    def get_shop(self, shop_id):
         path = 'shops/{}'.format(shop_id)
         data = self.get(path)
 
@@ -58,3 +59,51 @@ class Etsy(object):
 
         data['more'] = self.get('{}/about'.format(path))
         return data
+
+    @classmethod
+    def parse_listing(cls, d):
+        img = d.get('MainImage', {})
+        shop = d.get('Shop', {})
+
+        entry = {
+            'title': d.get('title'),
+            'state': d.get('state') or 'NA',
+            'price': d.get('price'),
+            'currency': d.get('currency_code'),
+            'tags': d.get('tags'),
+            'materials': d.get('materials'),
+            'style': d.get('style'),
+            'taxonomy_old': d.get('category_path'),
+            'taxonomy': d.get('taxonomy_path'),
+            'views': d.get('views', 0),
+            'favorers': d.get('num_favorers', 0),
+            'image_main': img.get('url_170x135', '').replace('170x135', '340x270'),
+            'seller_id': shop.get('shop_id'),
+            'last_synced': timezone.now(),
+        }
+
+        return entry
+
+    @classmethod
+    def parse_shop(cls, d):
+        story, social = None, None
+        if d['more']:
+            story = d['more']['story']
+            links = d['more'].get('related_links', {})
+            social = {
+                l['title']: l['url'] for l in (
+                    links.values() if type(links) == dict else (links or [])
+                )
+            }
+
+        entry = {
+            'name': d['shop_name'],
+            'title': d['title'],
+            'icon_url': d['icon_url_fullxfull'],
+            'num_favorers': d.get('num_favorers', 0),
+            'listings_all_count': d['listing_active_count'],
+            'story': story,
+            'social': social or None,
+        }
+
+        return entry

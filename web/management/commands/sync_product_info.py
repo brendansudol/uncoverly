@@ -52,12 +52,12 @@ class Command(BaseCommand):
         logger.info('total products: {}'.format(len(products)))
 
         for i, p in enumerate(products[:self.limit]):
-            data = etsy.get_listing_details(p.id)
+            data = etsy.get_listing(p.id)
 
             if not data:
                 continue
 
-            clean = self.clean_data(data)
+            clean = etsy.parse_listing(data)
             logger.info('data: {}\n'.format(clean))
 
             for k, v in clean.items():
@@ -69,25 +69,3 @@ class Command(BaseCommand):
                 sleep(1)
 
         Product.update_visibility()
-
-    @classmethod
-    def clean_data(cls, d):
-        img = d.get('MainImage', {}).get('url_170x135', '')
-
-        entry = {
-            'title': d.get('title'),
-            'state': d.get('state') or 'NA',
-            'price': d.get('price'),
-            'currency': d.get('currency_code'),
-            'tags': d.get('tags'),
-            'materials': d.get('materials'),
-            'style': d.get('style'),
-            'taxonomy_old': d.get('category_path'),
-            'taxonomy': d.get('taxonomy_path'),
-            'views': d.get('views', 0),
-            'favorers': d.get('num_favorers', 0),
-            'image_main': img.replace('170x135', '340x270'),
-            'last_synced': cls.now,
-        }
-
-        return entry
