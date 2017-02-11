@@ -8,7 +8,6 @@ from django.contrib.postgres.fields import ArrayField
 from django.db import models, transaction
 from django.db.models import Q
 from django.utils import timezone
-from jsonfield import JSONField
 
 
 class ModelBase(models.Model):
@@ -27,7 +26,6 @@ class Seller(ModelBase):
     num_favorers = models.PositiveIntegerField(null=True, blank=True)
     listings_all_count = models.PositiveIntegerField(null=True, blank=True)
     story = models.TextField(null=True, blank=True)
-    social = JSONField(null=True, blank=True)
 
     def __str__(self):
         return self.id
