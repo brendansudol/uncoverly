@@ -89,7 +89,7 @@ class Product(ModelBase):
     views = models.PositiveIntegerField(null=True, blank=True)
     favorers = models.PositiveIntegerField(null=True, blank=True)
 
-    image_main = models.URLField(null=True, blank=True)
+    image = models.URLField(null=True, blank=True)
 
     last_synced = models.DateTimeField(default=timezone.now, blank=True)
 
@@ -118,8 +118,8 @@ class Product(ModelBase):
 
     @property
     def image_lg(self):
-        if self.image_main:
-            return self.image_main.replace("340x270", "570xN")
+        if self.image:
+            return self.image.replace("340x270", "570xN")
 
     @property
     def price_display(self):
@@ -131,7 +131,7 @@ class Product(ModelBase):
         return bool(
             self.state == 'active' and
             self.is_awesome and
-            all([self.title, self.price_usd, self.image_main])
+            all([self.title, self.price_usd, self.image])
         )
 
     @classmethod

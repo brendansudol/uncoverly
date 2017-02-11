@@ -12,10 +12,10 @@
         {% for p in cat.products %}
           <div class='col col-4 sm-col-2'>
             <div class='bg-white'>
-              {% if p.image_main %}
+              {% if p.image %}
                 <div class='img-cntnr ratio-34-27'>
                   <a href='{% url "web:product" p.pk %}'>
-                    <img class='block' src='{{ p.image_main }}'>
+                    <img class='block' src='{{ p.image }}'>
                   </a>
                 </div>
               {% endif %}

@@ -60,6 +60,12 @@ class Etsy(object):
         data['more'] = self.get('{}/about'.format(path))
         return data
 
+    def get_shop_listings(self, shop_id, page=1):
+        return self.get(
+            'shops/{}/listings/active'.format(shop_id),
+            {'includes': 'MainImage', 'limit': 10, 'page': page},
+        )
+
     @classmethod
     def parse_listing(cls, d):
         img = d.get('MainImage', {})
@@ -77,7 +83,7 @@ class Etsy(object):
             'taxonomy': d.get('taxonomy_path'),
             'views': d.get('views', 0),
             'favorers': d.get('num_favorers', 0),
-            'image_main': img.get('url_170x135', '').replace('170x135', '340x270'),
+            'image': img.get('url_170x135', '').replace('170x135', '340x270'),
             'seller_id': shop.get('shop_id'),
             'last_synced': timezone.now(),
         }

@@ -17,7 +17,7 @@ class ProductAdmin(admin.ModelAdmin):
             '<img src="{}" style="width:120px;">'
             '</a>',
             obj.pk,
-            obj.image_main,
+            obj.image,
         )
 
     def set_awesome(value):  # NOQA

@@ -10,7 +10,7 @@
 <meta name='twitter:site' content='@uncoverly' />
 <meta name='twitter:creator' content='@uncoverly' />
 <meta name='twitter:title' content='{{ product.title }}' />
-<meta name='twitter:image' content='{{ product.image_main }}' />
+<meta name='twitter:image' content='{{ product.image }}' />
 <meta name='twitter:url' content='{{ request.build_absolute_uri }}' />
 {% endblock %}
 
@@ -71,9 +71,9 @@
     {% for p in more_seller %}
       <div class='col col-6 sm-col-3 border-box'>
         <div class='bg-white'>
-        {% if p.image_main %}
+        {% if p.image %}
           <a href='{% url "web:product" p.pk %}'>
-            <img class='block' src='{{ p.image_main }}'>
+            <img class='block' src='{{ p.image }}'>
           </a>
         {% endif %}
         </div>
@@ -96,9 +96,9 @@
     {% for p in more_category %}
       <div class='col col-6 sm-col-3 border-box'>
         <div class='bg-white'>
-        {% if p.image_main %}
+        {% if p.image %}
           <a href='{% url "web:product" p.pk %}'>
-            <img class='block' src='{{ p.image_main }}'>
+            <img class='block' src='{{ p.image }}'>
           </a>
         {% endif %}
         </div>

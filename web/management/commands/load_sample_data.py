@@ -55,7 +55,7 @@ class Command(BaseCommand):
                 price_usd=d['price_usd'],
                 category=d['category'],
                 tags=d['tags'],
-                image_main=d['img'],
+                image=d['img'],
                 seller=seller,
             )
 
