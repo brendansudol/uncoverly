@@ -1,5 +1,4 @@
 from collections import defaultdict, OrderedDict
-from datetime import datetime
 from functools import reduce
 from operator import or_
 from random import randrange, shuffle
@@ -8,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.postgres.fields import ArrayField
 from django.db import models, transaction
 from django.db.models import Q
+from django.utils import timezone
 from jsonfield import JSONField
 
 
@@ -91,7 +91,7 @@ class Product(ModelBase):
 
     image_main = models.URLField(null=True, blank=True)
 
-    last_synced = models.DateTimeField(default=datetime.now, blank=True)
+    last_synced = models.DateTimeField(default=timezone.now, blank=True)
 
     is_awesome = models.NullBooleanField()
     is_visible = models.BooleanField(default=False)

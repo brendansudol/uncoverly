@@ -35,12 +35,18 @@ class Etsy(object):
             return
 
         data = res.json()
-        return None if not data else data['results'][0]
+        return data and data['results'][0] if data['count'] == 1 else data
+
+    def get_user_faves(self, username, page=1):
+        return self.get(
+            'users/{}/favorites/listings'.format(username),
+            {'limit': 10, 'page': page},
+        )
 
     def get_listing_details(self, listing_id):
         return self.get(
             'listings/{}'.format(listing_id),
-            {'includes': 'MainImage,Shop'}
+            {'includes': 'MainImage,Shop'},
         )
 
     def get_shop_info(self, shop_id):

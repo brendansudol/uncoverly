@@ -72,7 +72,6 @@ class Command(BaseCommand):
 
     @classmethod
     def clean_data(cls, d):
-        cats = d.get('category_path')
         img = d.get('MainImage', {}).get('url_170x135', '')
 
         entry = {
@@ -83,9 +82,8 @@ class Command(BaseCommand):
             'tags': d.get('tags'),
             'materials': d.get('materials'),
             'style': d.get('style'),
-            'taxonomy_old': cats,
+            'taxonomy_old': d.get('category_path'),
             'taxonomy': d.get('taxonomy_path'),
-            'category': cats[0] if cats and len(cats) > 0 else None,
             'views': d.get('views', 0),
             'favorers': d.get('num_favorers', 0),
             'image_main': img.replace('170x135', '340x270'),
