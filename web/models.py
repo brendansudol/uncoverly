@@ -160,6 +160,25 @@ class Product(ModelBase):
                 p.save()
 
 
+class ImageDetail(ModelBase):
+    product = models.OneToOneField(
+        Product,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
+    id = models.CharField(max_length=32)
+    hex_code = models.CharField(max_length=16, null=True, blank=True)
+    red = models.PositiveIntegerField(null=True, blank=True)
+    green = models.PositiveIntegerField(null=True, blank=True)
+    blue = models.PositiveIntegerField(null=True, blank=True)
+    hue = models.PositiveIntegerField(null=True, blank=True)
+    saturation = models.PositiveIntegerField(null=True, blank=True)
+    brightness = models.PositiveIntegerField(null=True, blank=True)
+    full_height = models.PositiveIntegerField(null=True, blank=True)
+    full_width = models.PositiveIntegerField(null=True, blank=True)
+    square_url = models.URLField(null=True, blank=True)
+
+
 class Favorite(ModelBase):
     product = models.ForeignKey(Product, related_name='favorites')
     user = models.ForeignKey(User, related_name='favorites')

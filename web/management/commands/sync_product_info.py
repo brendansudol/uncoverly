@@ -61,8 +61,9 @@ class Command(BaseCommand):
             logger.info('data: {}\n'.format(clean))
 
             for k, v in clean.items():
-                if v is not None and v != '':
-                    setattr(p, k, v)
+                if v is None or v == '' or k == 'seller_id':  # TODO - clean up
+                    continue
+                setattr(p, k, v)
             p.save()
 
             if i % 5 == 0:

@@ -1,0 +1,26 @@
+{% extends 'web/base.html' %}
+
+{% block container %}
+<div class='sm-col-8 md-col-6 mx-auto'>
+  <p class='mb4 p2 bold white bg-red center rounded'>Work in progress!</p>
+  {% for q in '12345' %}
+    <div class='mb4 unanswered' id='q-{{ q }}'>
+      <h3 class='mb0'>Question...</h3>
+      <div class='mb1 h5'>{{ q }} of 5</div>
+      <div class='flex flex-wrap mxn1'>
+        {% for a in '1234' %}
+          <div class='mb2 px1 col-6 border-box a-card'>
+            <div class='bg-white'>
+              <div class='px2 py4'>foo</div>
+              <label class="block p1 bg-darken-1">
+                <input type="radio" name='{{ q }}-1' value='a-{{ a }}'>
+                something
+              </label>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

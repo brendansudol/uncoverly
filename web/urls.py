@@ -7,7 +7,7 @@ from web.views.favorite import FavoriteView, FavoritesView
 from web.views.featured import FeaturedSellerView
 from web.views.find import FindView, FindsView
 from web.views.home import HomeView
-from web.views.misc import ContactView, PrivacyView, TermsView
+from web.views.misc import ContactView, PrivacyView, QuizView, TermsView
 from web.views.newsletter import NewsletterView
 from web.views.product import ProductView
 from web.views.search import SearchView
@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^newsletter$', NewsletterView.as_view(), name='newsletter'),
     url(r'^p/(?P<pk>[\w/\-]+)?$', ProductView.as_view(), name='product'),
     url(r'^privacy$', PrivacyView.as_view(), name='privacy'),
+    url(r'^quiz$', QuizView.as_view(), name='quiz'),
     url(r'^s/(?P<pk>[\w/\-]+)?$', SellerView.as_view(), name='seller'),
     url(r'^search$', SearchView.as_view(), name='search'),
     url(r'^terms$', TermsView.as_view(), name='terms'),

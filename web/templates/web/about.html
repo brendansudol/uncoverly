@@ -9,8 +9,8 @@
     {% for p in banner %}
       <div class='col col-3'>
         <div class='img-cntnr ratio-34-27'>
-          <a href='{% url "web:product" p.pk %}'>
-            <img class='block' src='{{ p.image }}'>
+          <a href='{% url "web:product" p.id %}'>
+            <img class='block' src='{{ p.img }}'>
           </a>
         </div>
       </div>
@@ -23,8 +23,8 @@
     </div>
     <div class='col col-4 sm-col-6 px2'>
       <div class='img-cntnr ratio-34-27 bg-white'>
-        <a href='{% url "web:product" p1.pk %}'>
-          <img class='block' src='{{ p1.image }}'>
+        <a href='{% url "web:product" p1.id %}'>
+          <img class='block' src='{{ p1.img }}'>
         </a>
       </div>
     </div>
@@ -36,8 +36,8 @@
     </div>
     <div class='col col-4 sm-col-6 px2'>
       <div class='img-cntnr ratio-34-27 bg-white'>
-        <a href='{% url "web:product" p2.pk %}'>
-          <img class='block' src='{{ p2.image }}'>
+        <a href='{% url "web:product" p2.id %}'>
+          <img class='block' src='{{ p2.img }}'>
         </a>
       </div>
     </div>
