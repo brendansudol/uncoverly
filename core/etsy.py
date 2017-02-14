@@ -50,6 +50,11 @@ class Etsy(object):
             {'includes': 'MainImage,Shop'},
         )
 
+    def get_listing_images(self, listing_id):
+        return self.get(
+            'listings/{}/images'.format(listing_id)
+        )
+
     def get_shop(self, shop_id):
         path = 'shops/{}'.format(shop_id)
         data = self.get(path)

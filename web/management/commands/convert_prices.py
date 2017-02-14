@@ -21,7 +21,8 @@ class Command(BaseCommand):
                 continue
 
             try:
-                p.price_usd = latest_rates.to_usd(int(p.price), p.currency)
+                cents_local = int(float(p.price) * 100)
+                p.price_usd = latest_rates.to_usd(cents_local, p.currency)
                 p.save()
                 update += 1
             except Exception as e:
