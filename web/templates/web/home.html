@@ -1,4 +1,5 @@
 {% extends 'web/base.html' %}
+{% block title %}{% if category %}Best {{ category.display }} on Etsy :: Uncoverly{% else %}Uncoverly :: Discover the best of Etsy{% endif %}{% endblock %}
 
 {% block container %}
 <div class='my1 clearfix mxn1'>

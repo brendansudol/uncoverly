@@ -11,9 +11,9 @@ __pycache__/
 local
 misc
 node_modules
+scratchpad.py
 secrets
 TODO
 venv
 
-web/management/commands/refresh_products.py
 web/static/build
