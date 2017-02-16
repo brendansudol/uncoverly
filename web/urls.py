@@ -3,6 +3,7 @@ from django.conf.urls import url
 from web.views.about import AboutView
 from web.views.auth import LoginView, LogoutView, SignupView
 from web.views.category import CategoriesView, CategoryView
+# from web.views.color import ColorView
 from web.views.favorite import FavoriteView, FavoritesView
 from web.views.featured import FeaturedSellerView
 from web.views.find import FindView, FindsView
@@ -19,6 +20,7 @@ urlpatterns = [
     url(r'^about$', AboutView.as_view(), name='about'),
     url(r'^c/(?P<cat>[\w/\-]+)?$', CategoryView.as_view(), name='category'),
     url(r'^categories$', CategoriesView.as_view(), name='categories'),
+    # url(r'^color/(?P<hex>[\w/\-]+)?$', ColorView.as_view(), name='color'),
     url(r'^contact$', ContactView.as_view(), name='contact'),
     url(r'^favorite/(?P<pid>[\w/\-]+)?$', FavoriteView.as_view(), name='fave'),
     url(r'^featured$', FeaturedSellerView.as_view(), name='featured'),

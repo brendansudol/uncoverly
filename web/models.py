@@ -62,6 +62,17 @@ class ProductManager(models.Manager):
 
         return qs.filter(state='active')
 
+    def color_search(self, hex, cushion=20):
+        rgb = list(int(hex[i:i + 2], 16) for i in (0, 2, 4))
+        r, g, b = [(max(0, c - cushion), min(255, c + cushion)) for c in rgb]
+
+        qs = self.get_queryset().filter(imagedetail__isnull=False)
+
+        return qs \
+            .filter(imagedetail__red__gte=r[0], imagedetail__red__lte=r[1]) \
+            .filter(imagedetail__green__gte=g[0], imagedetail__green__lte=g[1]) \
+            .filter(imagedetail__blue__gte=b[0], imagedetail__blue__lte=b[1])
+
 
 class Product(ModelBase):
     def rand_default():
