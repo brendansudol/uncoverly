@@ -1,0 +1,22 @@
+{% extends 'web/base.html' %}
+{% block title %}#{{ hex }} :: Uncoverly{% endblock %}
+
+{% block container %}
+<div class='my3 p2 bg-darken-1 rounded center'>
+  {% if total %}
+    {{ total }} result{{ total|pluralize }} for <strong>#{{ hex }}</strong>
+  {% else %}
+    Sorry! There are no results for <strong>#{{ hex }}</strong>.
+  {% endif %}
+</div>
+
+<div class='flex flex-wrap mxn2'>
+  {% for product in products %}
+  <div class='col-6 sm-col-4 border-box px2'>
+    {% include 'web/_includes/product-card.html' with p=product %}
+  </div>
+  {% endfor %}
+</div>
+
+{% include 'web/_includes/pagination.html' %}
+{% endblock %}

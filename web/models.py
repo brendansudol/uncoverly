@@ -62,9 +62,9 @@ class ProductManager(models.Manager):
 
         return qs.filter(state='active')
 
-    def color_search(self, hex, cushion=20):
+    def color_search(self, hex, dist=20):
         rgb = list(int(hex[i:i + 2], 16) for i in (0, 2, 4))
-        r, g, b = [(max(0, c - cushion), min(255, c + cushion)) for c in rgb]
+        r, g, b = [(max(0, c - dist), min(255, c + dist)) for c in rgb]
 
         qs = self.get_queryset().filter(imagedetail__isnull=False)
 
