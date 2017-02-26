@@ -100,9 +100,6 @@ class ProductManager(models.Manager):
 
 
 class Product(ModelBase):
-    def rand_default():
-        return randrange(1e4)
-
     id = models.CharField(max_length=64, primary_key=True)
     seller = models.ForeignKey(
         Seller, related_name='products', null=True, blank=True

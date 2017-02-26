@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-import web.models
 
 
 class Migration(migrations.Migration):
@@ -20,6 +19,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='product',
             name='rand1',
-            field=models.PositiveIntegerField(default=web.models.Product.rand_default),
+            field=models.PositiveIntegerField(default=123),
         ),
     ]
