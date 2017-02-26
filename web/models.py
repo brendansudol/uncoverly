@@ -29,6 +29,8 @@ class Seller(ModelBase):
     story = models.TextField(null=True, blank=True)
     social = JSONField(null=True, blank=True)
 
+    visible_product_count = models.IntegerField(null=True, blank=True)
+
     def __str__(self):
         return self.id
 
@@ -40,6 +42,13 @@ class Seller(ModelBase):
             return
 
         return '@{}'.format(tw.split('/')[-1])
+
+    @classmethod
+    def update_product_count(cls):
+        for s in cls.objects.prefetch_related('products'):
+            ct = len([p for p in s.products.all() if p.is_visible])
+            s.visible_product_count = ct
+            s.save()
 
 
 class ProductManager(models.Manager):
