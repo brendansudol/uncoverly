@@ -7,8 +7,8 @@ from web.models import Product, Seller
 class SellersView(ListView):
     context_object_name = 'sellers'
     model = Seller
-    ordering = '-created'
-    paginate_by = 4
+    ordering = '-rand'
+    paginate_by = 6
     template_name = 'web/sellers.html'
 
     def get_queryset(self):

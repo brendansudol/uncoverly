@@ -11,6 +11,10 @@ from django.utils import timezone
 from jsonfield import JSONField
 
 
+def rand_int():
+    return randrange(1e4)
+
+
 class ModelBase(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -31,6 +35,8 @@ class Seller(ModelBase):
 
     visible_product_count = models.IntegerField(null=True, blank=True)
 
+    rand = models.PositiveIntegerField(default=rand_int)
+
     def __str__(self):
         return self.id
 
@@ -49,6 +55,16 @@ class Seller(ModelBase):
             ct = len([p for p in s.products.all() if p.is_visible])
             s.visible_product_count = ct
             s.save()
+
+    @classmethod
+    def randomize(cls):
+        sellers = cls.objects.all()
+        nums = list(range(len(sellers)))
+        shuffle(nums)
+        with transaction.atomic():
+            for i, s in enumerate(sellers):
+                s.rand = nums[i]
+                s.save()
 
 
 class ProductManager(models.Manager):
@@ -84,9 +100,6 @@ class ProductManager(models.Manager):
 
 
 class Product(ModelBase):
-    def rand_default():
-        return randrange(1e4)
-
     id = models.CharField(max_length=64, primary_key=True)
     seller = models.ForeignKey(
         Seller, related_name='products', null=True, blank=True
@@ -117,8 +130,8 @@ class Product(ModelBase):
     is_visible = models.BooleanField(default=False)
     tw_featured = models.BooleanField(default=False)
 
-    rand1 = models.PositiveIntegerField(default=rand_default)
-    rand2 = models.PositiveIntegerField(default=rand_default)
+    rand1 = models.PositiveIntegerField(default=rand_int)
+    rand2 = models.PositiveIntegerField(default=rand_int)
 
     objects = ProductManager()
 
