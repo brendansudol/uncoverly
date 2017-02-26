@@ -41,6 +41,10 @@ class Seller(ModelBase):
         return self.id
 
     @property
+    def active_products(self):
+        return self.products.filter(is_visible=True)
+
+    @property
     def tw_handle(self):
         tw = (self.social or {}).get('twitter')
 

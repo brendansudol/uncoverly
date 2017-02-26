@@ -10,7 +10,7 @@
         {{ s.name }}
       </a>
       <div class='clearfix bg-white'>
-        {% for p in s.products.all|slice:':4' %}
+        {% for p in s.active_products|slice:':4' %}
           <div class='col col-4 sm-col-3'>
             <div class='bg-white'>
               {% if p.image %}
