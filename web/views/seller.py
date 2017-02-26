@@ -1,6 +1,19 @@
+from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 
 from web.models import Product, Seller
+
+
+class SellersView(ListView):
+    context_object_name = 'sellers'
+    model = Seller
+    ordering = '-created'
+    paginate_by = 4
+    template_name = 'web/sellers.html'
+
+    def get_queryset(self):
+        qs = super(SellersView, self).get_queryset()
+        return qs.filter(visible_product_count__gte=4)
 
 
 class SellerView(DetailView):

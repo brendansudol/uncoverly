@@ -1,9 +1,8 @@
 {% extends 'web/base.html' %}
-{% block title %}Featured Sellers :: Uncoverly{% endblock %}
+{% block title %}Shops :: Uncoverly{% endblock %}
 
 {% block container %}
-<h2 class='mt1 mb3'>Featured shops <small class='h4 regular'>{{ today }}</small></h2>
-<div class='clearfix mxn2'>
+<div class='clearfix mxn2 pt3'>
   {% for s in sellers %}
     <div class='sm-col sm-col-6 px2 mb3'>
       <a class='p2 block bg-darken-1 black rounded-top h4 bold' href='{% url "web:seller" s.pk %}'>
@@ -28,4 +27,6 @@
     </div>
   {% endfor %}
 </div>
+
+{% include 'web/_includes/pagination.html' %}
 {% endblock %}
