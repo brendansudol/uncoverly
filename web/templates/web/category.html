@@ -1,7 +1,12 @@
 {% extends 'web/base.html' %}
+{% block title %}Best {{ category.display }} on Etsy :: Uncoverly{% endblock %}
 
 {% block container %}
-{% include 'web/_includes/browse-links.html' with active='home' %}
+{% include 'web/_includes/browse-links.html' with active='category' %}
+
+<div class='mb3 p2 bg-darken-1 rounded center'>
+  <h3 class='m0'>{{ category.display }}</h3>
+</div>
 
 <div class='flex flex-wrap mxn2'>
   {% for product in products %}

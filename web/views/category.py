@@ -46,7 +46,7 @@ class CategoryView(ListView):
     model = Product
     ordering = '-created'
     paginate_by = 12
-    template_name = 'web/home.html'
+    template_name = 'web/category.html'
 
     def dispatch(self, *args, **kwargs):
         self.cat_id = self.kwargs['cat']

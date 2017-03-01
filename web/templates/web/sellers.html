@@ -2,7 +2,9 @@
 {% block title %}Shops :: Uncoverly{% endblock %}
 
 {% block container %}
-<div class='clearfix mxn2 pt3'>
+{% include 'web/_includes/browse-links.html' with active='shops' %}
+
+<div class='clearfix mxn2'>
   {% for s in sellers %}
     <div class='sm-col sm-col-6 px2 mb3'>
       <a class='p2 block bg-darken-1 black rounded-top h4 bold' href='{% url "web:seller" s.pk %}'>

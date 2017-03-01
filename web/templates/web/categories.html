@@ -2,29 +2,29 @@
 {% block title %}Shop by Category :: Uncoverly{% endblock %}
 
 {% block container %}
-<div class='py3'>
-  {% for cat in categories %}
-    <div class='mb4'>
-      <a class='py2 px3 block bg-darken-1 black rounded-top h4 bold' href='{% url "web:category" cat.id %}'>
-        <i class='right icon ion-chevron-right'></i>
-        <span>{{ cat.display }}</span>
-      </a>
-      <div class='clearfix'>
-        {% for p in cat.products %}
-          <div class='col col-4 sm-col-2'>
-            <div class='bg-white'>
-              {% if p.image %}
-                <div class='img-cntnr ratio-34-27'>
-                  <a href='{% url "web:product" p.pk %}'>
-                    <img class='block' src='{{ p.image }}'>
-                  </a>
-                </div>
-              {% endif %}
-            </div>
+{% include 'web/_includes/browse-links.html' with active='category' %}
+
+{% for cat in categories %}
+  <div class='mb4'>
+    <a class='py2 px3 block bg-darken-1 black rounded-top h4 bold' href='{% url "web:category" cat.id %}'>
+      <i class='right icon ion-chevron-right'></i>
+      <span>{{ cat.display }}</span>
+    </a>
+    <div class='clearfix'>
+      {% for p in cat.products %}
+        <div class='col col-4 sm-col-2'>
+          <div class='bg-white'>
+            {% if p.image %}
+              <div class='img-cntnr ratio-34-27'>
+                <a href='{% url "web:product" p.pk %}'>
+                  <img class='block' src='{{ p.image }}'>
+                </a>
+              </div>
+            {% endif %}
           </div>
-        {% endfor %}
-      </div>
+        </div>
+      {% endfor %}
     </div>
-  {% endfor %}
-</div>
+  </div>
+{% endfor %}
 {% endblock %}

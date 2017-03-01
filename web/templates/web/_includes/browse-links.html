@@ -1,0 +1,9 @@
+{% load extras %}
+
+<div class='my1 clearfix mxn1'>
+  <div class='sm-col'>
+    <a href='{% url "web:home" %}' class='btn p1 {{ active|eq:"home"|yesno:"bold,regular" }}'>Discover</a>
+    <a href='{% url "web:categories" %}' class='btn p1 {{ active|eq:"category"|yesno:"bold,regular" }}'>Categories</a>
+    <a href='{% url "web:shops" %}' class='btn p1 {{ active|eq:"shops"|yesno:"bold,regular" }}'>Shops</a>
+  </div>
+</div>

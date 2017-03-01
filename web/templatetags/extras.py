@@ -15,6 +15,11 @@ def make_url(url, page, query=None):
 
 
 @register.filter
+def eq(a, b):
+    return a == b
+
+
+@register.filter
 def get(d, k):
     return d.get(k)
 
