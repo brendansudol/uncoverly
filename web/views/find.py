@@ -27,8 +27,11 @@ class FindsView(ListView):
         return super(FindsView, self).dispatch(*args, **kwargs)
 
     def get_queryset(self):
-        qs = super(FindsView, self).get_queryset()
-        return qs.filter(user_id=self.owner_id)
+        qs = super(FindsView, self).get_queryset() \
+            .filter(user_id=self.owner_id) \
+            .filter(product__image__isnull=False)
+
+        return qs
 
     def get_context_data(self, **kwargs):
         context = super(FindsView, self).get_context_data(**kwargs)

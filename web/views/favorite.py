@@ -22,8 +22,11 @@ class FavoritesView(ListView):
         return super(FavoritesView, self).dispatch(*args, **kwargs)
 
     def get_queryset(self):
-        qs = super(FavoritesView, self).get_queryset()
-        return qs.filter(user_id=self.owner_id)
+        qs = super(FavoritesView, self).get_queryset() \
+            .filter(user_id=self.owner_id) \
+            .filter(product__image__isnull=False)
+
+        return qs
 
     def get_context_data(self, **kwargs):
         context = super(FavoritesView, self).get_context_data(**kwargs)
