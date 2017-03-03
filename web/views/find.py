@@ -29,7 +29,8 @@ class FindsView(ListView):
     def get_queryset(self):
         qs = super(FindsView, self).get_queryset() \
             .filter(user_id=self.owner_id) \
-            .filter(product__image__isnull=False)
+            .exclude(product__image__isnull=True) \
+            .exclude(product__image__exact='')
 
         return qs
 
