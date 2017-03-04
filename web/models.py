@@ -57,8 +57,9 @@ class Seller(ModelBase):
     def update_product_count(cls):
         for s in cls.objects.prefetch_related('products'):
             ct = len([p for p in s.products.all() if p.is_visible])
-            s.visible_product_count = ct
-            s.save()
+            if ct != s.visible_product_count:
+                s.visible_product_count = ct
+                s.save()
 
     @classmethod
     def randomize(cls):
