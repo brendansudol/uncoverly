@@ -9,6 +9,11 @@
     {% if page_obj.has_next %}
     <a href='{% make_url request.path page_obj.next_page_number query %}' class='right btn'>Next ›</a>
     {% endif %}
+    {% if page_obj.number > 1 %}
+    <div class='left btn muted border-right'>
+      <span class='xs-hide'>Page </span>{{ page_obj.number }}
+    </div>
+    {% endif %}
   </div>
 </div>
 {% endif %}
