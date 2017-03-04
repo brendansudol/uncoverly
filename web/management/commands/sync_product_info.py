@@ -7,7 +7,7 @@ from django.core.management import BaseCommand
 from django.utils import timezone
 
 from core.etsy import Etsy
-from web.models import Product
+from web.models import Product, Seller
 
 
 logger = logging.getLogger(__name__)
@@ -70,3 +70,4 @@ class Command(BaseCommand):
                 sleep(1)
 
         Product.update_visibility()
+        Seller.update_product_count()
