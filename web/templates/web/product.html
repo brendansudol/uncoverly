@@ -32,7 +32,7 @@
     <div class='h4 mb3'>
       {{ product.title|lower|safe }}
     </div>
-    <div class='mb1'>
+    <div class='mb2'>
     {% if product.price_usd %}
       <a class='btn btn-primary' target='_blank' href='https://www.etsy.com/listing/{{ product.pk }}'>{{ product.price_display }} ➞</a>
     {% else %}
@@ -40,23 +40,23 @@
     {% endif %}
     </div>
     <div class='mb1'>
-      <a class='btn btn-outline border-gray h5 regular fave-action' href='#!' data-id='{{ product.pk }}'>
+      <a class='btn btn-outline border-silver h5 regular fave-action' href='#!' data-id='{{ product.pk }}'>
         <div class='line-height-1'>
           <div class='inline-block align-bottom heart-cntnr {% if product.pk in favorites %}faved{% endif %}'>
             <div class='heart'></div>
           </div>
-          <span class='ml-tiny'>Like</span>
+          <span class='ml05'>Like</span>
         </div>
       </a>
     </div>
-    <div class='mb3'>
-      <a target='_blank' href='https://twitter.com/intent/tweet?url={{ request.build_absolute_uri|urlencode }}&text={{ "I ❤️ this!"|urlencode }}&via=uncoverly' class='mr1 btn btn-outline px1 py-tiny border-gray border-box center'><img class='align-middle' src='/static/img/ico/twitter.svg' width='14' height='14'></a>
-      <a target='_blank' href='http://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}' class='btn btn-outline border-gray px1 py-tiny border-box center'><img class='align-middle' src='/static/img/ico/facebook.svg' width='14' height='14'></a>
+    <div class='mb3 mxn05'>
+      <a target='_blank' href='https://twitter.com/intent/tweet?url={{ request.build_absolute_uri|urlencode }}&text={{ "I ❤️ this!"|urlencode }}&via=uncoverly' class='btn px05 py0'><img class='align-middle' src='/static/img/ico/twitter.svg' width='14' height='14'></a>
+      <a target='_blank' href='http://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}' class='btn px05 py0'><img class='align-middle' src='/static/img/ico/facebook.svg' width='14' height='14'></a>
     </div>
     {% if product.keywords %}
       <div>
         {% for item in product.keywords %}
-          <a href='/search?q={{ item|urlencode|prettify }}' class='btn btn-primary p-tiny mb1 mr1 h6 regular black bg-darken-1'>{{ item|lower|safe }}</a>
+          <a href='/search?q={{ item|urlencode|prettify }}' class='btn btn-primary p05 mb1 mr1 h6 regular black bg-darken-1'>{{ item|lower|safe }}</a>
         {% endfor %}
       </div>
     {% endif %}
