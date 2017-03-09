@@ -7,7 +7,7 @@ from web.views.color import ColorView
 from web.views.favorite import FavoriteView, FavoritesView
 from web.views.find import FindView, FindsView
 from web.views.home import HomeView
-from web.views.misc import ContactView, PrivacyView, QuizView, TermsView
+from web.views.misc import ContactView, LabsView, PrivacyView, QuizView, TermsView
 from web.views.newsletter import NewsletterView
 from web.views.product import ProductView
 from web.views.search import SearchView
@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^favorite/(?P<pid>[\w/\-]+)?$', FavoriteView.as_view(), name='fave'),
     url(r'^find$', FindView.as_view(), name='find'),
     url(r'^join$', SignupView.as_view(), name='signup'),
+    url(r'^labs$', LabsView.as_view(), name='labs'),
     url(r'^login$', LoginView.as_view(), name='login'),
     url(r'^logout$', LogoutView.as_view(), name='logout'),
     url(r'^newsletter$', NewsletterView.as_view(), name='newsletter'),

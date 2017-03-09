@@ -5,6 +5,10 @@ class ContactView(TemplateView):
     template_name = 'web/contact.html'
 
 
+class LabsView(TemplateView):
+    template_name = 'web/labs.html'
+
+
 class PrivacyView(TemplateView):
     template_name = 'web/privacy.html'
 
