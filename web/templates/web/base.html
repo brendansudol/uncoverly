@@ -34,6 +34,13 @@
       </header>
       {% block callout %}{% endblock %}
       {% block content %}
+      {% if not user.is_authenticated %}
+        <div class='px2 container'>
+          <div class='lg-mxn2 px2 py1 bg-darken-1 h5 border border-top-none rounded-bottom'>
+            Uncoverly is a curated collection of the most beautiful goods and shops on Etsy.
+          </div>
+        </div>
+      {% endif %}
       <div class='container px2 py3'>
         {% block container %}{% endblock %}
       </div>
