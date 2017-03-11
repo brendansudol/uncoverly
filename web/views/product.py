@@ -30,7 +30,7 @@ class ProductView(DetailView):
             .filter(is_visible=True) \
             .filter(taxonomy__0=category) \
             .exclude(pk=self.object.pk) \
-            .all()[:8]
+            .all()[:6]
 
     def more_by_seller(self):
         seller = self.object.seller

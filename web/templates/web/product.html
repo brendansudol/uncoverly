@@ -64,47 +64,51 @@
 </div>
 
 {% if more_seller|length > 3 %}
-  <div class='mb2 sm-mb3 p2 sm-p3 bg-darken-1'>
-    <div class='mb2 center'>
-      More from <a class='bold black' href='{% url "web:seller" product.seller.pk %}'>{{ product.seller.name }}</a>
+  <div class='mb4'>
+    <div class='bg-darken-1 rounded-top h4'>
+      <a class='py2 px3 block black' href='{% url "web:seller" product.seller.pk %}'>
+        More from <strong>{{ product.seller.name }}</strong>
+      </a>
     </div>
-    <div class='clearfix'>
-    {% for p in more_seller %}
-      <div class='col col-6 sm-col-3 border-box'>
-        <div class='bg-white'>
-        {% if p.image %}
-          <a href='{% url "web:product" p.pk %}'>
-            <img class='block' src='{{ p.image }}'>
-          </a>
-        {% endif %}
+    <div class='clearfix bg-white'>
+      {% for p in more_seller %}
+        <div class='col col-6 sm-col-3'>
+          <div class='bg-white'>
+            {% if p.image %}
+              <div class='img-cntnr ratio-34-27'>
+                <a href='{% url "web:product" p.pk %}'>
+                  <img class='block' src='{{ p.image }}'>
+                </a>
+              </div>
+            {% endif %}
+          </div>
         </div>
-      </div>
-    {% endfor %}
+      {% endfor %}
     </div>
   </div>
 {% endif %}
 
 {% if more_category|length %}
-  <div class='mb2 sm-mb3 p2 sm-p3 bg-darken-1'>
-    <div class='mb2 center'>
-      {% if cat_id %}
-        More from <a class='bold black' href='{% url "web:category" cat_id %}'>{{ product.category }}</a>
-      {% else %}
+  <div class='mb4'>
+    <div class='bg-darken-1 rounded-top h4'>
+      <a class='py2 px3 block black' href='{% url "web:category" cat_id %}'>
         More from <strong>{{ product.category }}</strong>
-      {% endif %}
+      </a>
     </div>
-    <div class='clearfix'>
-    {% for p in more_category %}
-      <div class='col col-6 sm-col-3 border-box'>
-        <div class='bg-white'>
-        {% if p.image %}
-          <a href='{% url "web:product" p.pk %}'>
-            <img class='block' src='{{ p.image }}'>
-          </a>
-        {% endif %}
+    <div class='clearfix bg-white'>
+      {% for p in more_category %}
+        <div class='col col-4 sm-col-2'>
+          <div class='bg-white'>
+            {% if p.image %}
+              <div class='img-cntnr ratio-34-27'>
+                <a href='{% url "web:product" p.pk %}'>
+                  <img class='block' src='{{ p.image }}'>
+                </a>
+              </div>
+            {% endif %}
+          </div>
         </div>
-      </div>
-    {% endfor %}
+      {% endfor %}
     </div>
   </div>
 {% endif %}
