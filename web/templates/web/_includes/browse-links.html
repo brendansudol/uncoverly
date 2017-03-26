@@ -6,4 +6,9 @@
     <a href='{% url "web:categories" %}' class='btn p1 {{ active|eq:"category"|yesno:"bold,regular" }}'>Categories</a>
     <a href='{% url "web:shops" %}' class='btn p1 {{ active|eq:"shops"|yesno:"bold,regular" }}'>Shops</a>
   </div>
+  {% if is_paginated and page_obj.number > 1 %}
+  <div class='sm-col-right xs-hide'>
+    <div class='btn p1 regular h5 muted'>Page {{ page_obj.number }}</div>
+  </div>
+  {% endif %}
 </div>

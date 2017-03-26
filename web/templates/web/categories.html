@@ -9,7 +9,7 @@
     <a class='py2 px3 block bg-darken-1 black rounded-top h4 bold' href='{% url "web:category" cat.id %}'>
       <span>{{ cat.display }}</span>
     </a>
-    <div class='clearfix'>
+    <div class='clearfix bg-white'>
       {% for p in cat.products %}
         <div class='col col-4 sm-col-2'>
           <div class='bg-white'>

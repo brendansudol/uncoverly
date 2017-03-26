@@ -9,7 +9,7 @@
   {% endif %}
   <div class='h3 bold'>{{ seller.name }}</div>
   {% if seller.title %}
-    <p class='m0 h5'>{{ seller.title }}</p>
+    <p class='m0 h5'>{{ seller.title|safe }}</p>
   {% endif %}
   {% if site %}
     <a class='h5 black border-bottom' href='{{ site.full_url }}' target='_blank'>{{ site.display }}</a>
