@@ -12,7 +12,7 @@ CACHES = {
 
 INTERNAL_IPS = ['127.0.0.1']
 
-USE_LOCAL_DATABASE = True
+USE_LOCAL_DATABASE = False
 if USE_LOCAL_DATABASE:
     DATABASES['default'] = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',

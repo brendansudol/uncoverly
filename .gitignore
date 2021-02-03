@@ -16,5 +16,7 @@ secrets
 TODO
 venv
 
+package-lock.json
+
 web/static/build
 web/management/commands/backfill_db.py
