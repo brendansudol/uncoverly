@@ -14,7 +14,7 @@ flake8==3.3.0
 future==0.16.0
 futures==3.0.5
 gunicorn==19.6.0
-ipython==5.2.2
+ipython==7.16.3
 ipython-genutils==0.1.0
 jsonfield==1.0.3
 mailchimp==2.0.9
